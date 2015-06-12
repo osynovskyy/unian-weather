@@ -10,7 +10,8 @@
 #import <OpenGL/CGLMacro.h>
 
 #import "WeatherSectorPlugIn.h"
-#import "ArgumentKeys.h"
+
+#import "JKInterpolationMath.h"
 
 #define	kQCPlugIn_Name				@"Weather Sector"
 #define	kQCPlugIn_Description		@"Weather Sector Description"
@@ -77,6 +78,9 @@
 
 }
 
+@property double scale;
+
+@property NSString *icon;
 @property double radius;
 @property double windDirection;
 @property double windStrength;
@@ -120,15 +124,22 @@
 
 - (BOOL)renderToBuffer:(void *)baseAddress withBytesPerRow:(NSUInteger)rowBytes pixelFormat:(NSString *)format forBounds:(NSRect)bounds {
     
+    
     CGContextRef context = CGBitmapContextCreate(baseAddress, bounds.size.width, bounds.size.height, 8, rowBytes, [self imageColorSpace], kCGImageAlphaPremultipliedLast | kCGBitmapByteOrderDefault);
     
     CGContextClearRect(context, bounds);
     
     // Base 100px and scaling for any size
     
-    double scale = MAX(bounds.size.width, bounds.size.height)/100;
+    double scale = (MAX(bounds.size.width, bounds.size.height)/100);
     
     CGContextScaleCTM(context, scale, scale);
+    
+    double animation = self.scale;
+    double offset = 50*(1-animation);
+    
+    CGContextTranslateCTM(context, offset, offset);
+    CGContextScaleCTM(context, animation, animation);
     
     const CGFloat *colorComponets = CGColorGetComponents(self.backgroundColor);
     
@@ -161,7 +172,7 @@
     
     //Draw Icon
     
-    NSString *pathToIcon = [[NSBundle bundleForClass:[self class]] pathForResource:@"01d" ofType:@"png"];
+    NSString *pathToIcon = [[NSBundle bundleForClass:[self class]] pathForResource:self.icon ofType:@"png"];
     
     CGDataProviderRef dataProvider = CGDataProviderCreateWithFilename([pathToIcon cStringUsingEncoding:NSMacOSRomanStringEncoding]);
     
@@ -244,6 +255,8 @@
 // Here you need to declare the input / output properties as dynamic as Quartz Composer will handle their implementation
 //@dynamic inputFoo, outputBar;
 
+@dynamic inputAnimationEnable, inputInPoint, inputOutPoint, inputAnimationDuration;
+@dynamic inputIcon;
 @dynamic inputRadius;
 @dynamic inputTemp;
 @dynamic inputWindStrength, inputWindDirection, inputWindColor;
@@ -265,11 +278,55 @@
 {
 	// Specify the optional attributes for property based ports (QCPortAttributeNameKey, QCPortAttributeDefaultValueKey...).
     
+    if ([key isEqualToString:@"inputAnimationEnable"]) {
+        return @{
+                 QCPortAttributeNameKey: @"Enable Animation",
+                 QCPortAttributeTypeKey: QCPortTypeBoolean,
+                 QCPortAttributeDefaultValueKey: [NSNumber numberWithBool:NO]
+                 };
+    }
+    
+    if ([key isEqualToString:@"inputInPoint"]) {
+        return @{
+                 QCPortAttributeNameKey: @"In Point",
+                 QCPortAttributeTypeKey: QCPortTypeNumber,
+                 QCPortAttributeDefaultValueKey: [NSNumber numberWithFloat:0.0],
+                 QCPortAttributeMinimumValueKey: [NSNumber numberWithFloat:0.0]
+                 };
+    }
+    
+    if ([key isEqualToString:@"inputOutPoint"]) {
+        return @{
+                 QCPortAttributeNameKey: @"Out Point",
+                 QCPortAttributeTypeKey: QCPortTypeNumber,
+                 QCPortAttributeDefaultValueKey: [NSNumber numberWithFloat:2.0],
+                 QCPortAttributeMinimumValueKey: [NSNumber numberWithFloat:1.0]
+                 };
+    }
+    
+    if ([key isEqualToString:@"inputAnimationDuration"]) {
+        return @{
+                 QCPortAttributeNameKey: @"Animation Duration",
+                 QCPortAttributeTypeKey: QCPortTypeNumber,
+                 QCPortAttributeDefaultValueKey: [NSNumber numberWithFloat:1.0],
+                 QCPortAttributeMinimumValueKey: [NSNumber numberWithFloat:0.1]
+                 };
+    }
+    
+    if ([key isEqualToString:@"inputIcon"]) {
+        return @{
+                 QCPortAttributeNameKey: @"Icon",
+                 QCPortAttributeTypeKey: QCPortTypeString,
+                 QCPortAttributeDefaultValueKey: @"clear-sky"
+                 };
+    }
+    
     if ([key isEqualToString:@"inputRadius"]) {
         return @{
                  QCPortAttributeNameKey: @"Radius",
                  QCPortAttributeTypeKey: QCPortTypeNumber,
-                 QCPortAttributeDefaultValueKey: @"300"
+                 QCPortAttributeDefaultValueKey: [NSNumber numberWithFloat:300],
+                 QCPortAttributeMinimumValueKey: [NSNumber numberWithFloat:10]
                  };
     }
     
@@ -277,7 +334,7 @@
         return @{
                  QCPortAttributeNameKey: @"Temperature",
                  QCPortAttributeTypeKey: QCPortTypeNumber,
-                 QCPortAttributeDefaultValueKey: @"20.1"
+                 QCPortAttributeDefaultValueKey: [NSNumber numberWithFloat:17.3]
                  };
     }
     
@@ -285,7 +342,7 @@
         return @{
                  QCPortAttributeNameKey: @"Wind Direction",
                  QCPortAttributeTypeKey: QCPortTypeNumber,
-                 QCPortAttributeDefaultValueKey: @"0"
+                 QCPortAttributeDefaultValueKey: [NSNumber numberWithFloat:0.0]
                  };
     }
     
@@ -293,13 +350,15 @@
         return @{
                  QCPortAttributeNameKey: @"Wind Strength",
                  QCPortAttributeTypeKey: QCPortTypeNumber,
-                 QCPortAttributeDefaultValueKey: @"10"
+                 QCPortAttributeDefaultValueKey: [NSNumber numberWithFloat:10.0],
+                 QCPortAttributeMinimumValueKey: [NSNumber numberWithFloat:10],
+                 QCPortAttributeMaximumValueKey: [NSNumber numberWithFloat:360]
                  };
     }
     
     if ([key isEqualToString:@"inputWindColor"]) {
         return @{
-                 QCPortAttributeNameKey: @"Background Color",
+                 QCPortAttributeNameKey: @"Wind Sector Color",
                  QCPortAttributeTypeKey: QCPortTypeColor
                  };
     }
@@ -313,7 +372,8 @@
     
     if ([key isEqualToString:@"outputSector"]) {
         return @{
-                 QCPortAttributeNameKey: @"Sector"
+                 QCPortAttributeNameKey: @"Sector",
+                 QCPortAttributeTypeKey: QCPortTypeImage
                  };
     }
     
@@ -361,9 +421,31 @@
 	CGLContextObj cgl_ctx = [context CGLContextObj];
 	*/
     
-    SectorImageProvider* provider;
+    double animation = 1.0;
     
+    if (self.inputAnimationEnable) {
+        if (time < self.inputInPoint || time > self.inputOutPoint + self.inputAnimationDuration)
+            animation = 0.0;
+        else if (time >= self.inputInPoint && time <= self.inputInPoint+self.inputAnimationDuration) {
+            
+            CGFloat t = (time - self.inputInPoint)/self.inputAnimationDuration;
+            
+            animation = JKCubicInOutInterpolation(t, 0, 1);
+        } else if (time >= self.inputOutPoint && time <= self.inputOutPoint+self.inputAnimationDuration) {
+            
+            CGFloat t = (time - self.inputOutPoint)/self.inputAnimationDuration;
+            
+            animation = JKCubicInOutInterpolation(t, 1, 0);
+        }
+    }
+    
+    SectorImageProvider* provider;
+
     provider = [[SectorImageProvider alloc] initWithRadius: self.inputRadius];
+    
+    provider.scale = animation;
+    
+    provider.icon = self.inputIcon;
     
     provider.backgroundColor = self.inputBackgroundColor;
     provider.temperature = self.inputTemp;

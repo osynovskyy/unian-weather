@@ -19,6 +19,12 @@
 //@property double inputFoo;
 //@property (copy) NSString* outputBar;
 
+@property (assign) BOOL inputAnimationEnable;
+@property (assign) double inputInPoint;
+@property (assign) double inputOutPoint;
+@property (assign) double inputAnimationDuration;
+
+@property (assign) NSString *inputIcon;
 @property (assign) double inputRadius;
 @property (assign) double inputTemp;
 @property (assign) double inputWindDirection;

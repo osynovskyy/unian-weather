@@ -28,7 +28,14 @@
 		1C4B3AA31B273613005D9232 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C4B3AA21B273613005D9232 /* Images.xcassets */; };
 		1C4B3ABE1B27382E005D9232 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4B3ABB1B27380E005D9232 /* Quartz.framework */; };
 		1C4B3AC01B273B0B005D9232 /* composition.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 1C4B3ABF1B273B0B005D9232 /* composition.qtz */; };
-		1CDD1E871B29BB3B00FA7741 /* 01d.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CDD1E861B29BB3B00FA7741 /* 01d.png */; };
+		1CD0EEBC1B2ADDD600FBF35E /* JKInterpolationMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD0EEBB1B2ADDD600FBF35E /* JKInterpolationMath.m */; };
+		1CD0EEBE1B2AED6B00FBF35E /* few-clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD0EEBD1B2AED6B00FBF35E /* few-clouds.png */; };
+		1CD0EEC01B2AFA8300FBF35E /* scattered-clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD0EEBF1B2AFA8300FBF35E /* scattered-clouds.png */; };
+		1CD0EEC21B2B033600FBF35E /* broken-clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD0EEC11B2B033600FBF35E /* broken-clouds.png */; };
+		1CD0EEC41B2B089B00FBF35E /* shower-rain.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD0EEC31B2B089B00FBF35E /* shower-rain.png */; };
+		1CD0EEC61B2B0BE600FBF35E /* rain.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD0EEC51B2B0BE600FBF35E /* rain.png */; };
+		1CD0EEC81B2B116500FBF35E /* light-thunderstrom.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD0EEC71B2B116500FBF35E /* light-thunderstrom.png */; };
+		1CDD1E871B29BB3B00FA7741 /* clear-sky.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CDD1E861B29BB3B00FA7741 /* clear-sky.png */; };
 		1CE5DBBD1B28348D00F14EC7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C4B3AA41B273613005D9232 /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
@@ -71,7 +78,15 @@
 		1C4B3ABB1B27380E005D9232 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		1C4B3ABF1B273B0B005D9232 /* composition.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = composition.qtz; sourceTree = "<group>"; };
 		1C4B3AC91B274AEE005D9232 /* ArgumentKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArgumentKeys.h; sourceTree = "<group>"; };
-		1CDD1E861B29BB3B00FA7741 /* 01d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 01d.png; path = Resources/01d.png; sourceTree = "<group>"; };
+		1CD0EEBA1B2ADDD600FBF35E /* JKInterpolationMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKInterpolationMath.h; sourceTree = "<group>"; };
+		1CD0EEBB1B2ADDD600FBF35E /* JKInterpolationMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKInterpolationMath.m; sourceTree = "<group>"; };
+		1CD0EEBD1B2AED6B00FBF35E /* few-clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "few-clouds.png"; path = "Resources/few-clouds.png"; sourceTree = "<group>"; };
+		1CD0EEBF1B2AFA8300FBF35E /* scattered-clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "scattered-clouds.png"; path = "Resources/scattered-clouds.png"; sourceTree = "<group>"; };
+		1CD0EEC11B2B033600FBF35E /* broken-clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "broken-clouds.png"; path = "Resources/broken-clouds.png"; sourceTree = "<group>"; };
+		1CD0EEC31B2B089B00FBF35E /* shower-rain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shower-rain.png"; path = "Resources/shower-rain.png"; sourceTree = "<group>"; };
+		1CD0EEC51B2B0BE600FBF35E /* rain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rain.png; path = Resources/rain.png; sourceTree = "<group>"; };
+		1CD0EEC71B2B116500FBF35E /* light-thunderstrom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "light-thunderstrom.png"; path = "Resources/light-thunderstrom.png"; sourceTree = "<group>"; };
+		1CDD1E861B29BB3B00FA7741 /* clear-sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "clear-sky.png"; path = "Resources/clear-sky.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +141,8 @@
 		1C4B3A851B270264005D9232 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1CD0EEBA1B2ADDD600FBF35E /* JKInterpolationMath.h */,
+				1CD0EEBB1B2ADDD600FBF35E /* JKInterpolationMath.m */,
 				1C4B3AC91B274AEE005D9232 /* ArgumentKeys.h */,
 				1C4B3A861B270264005D9232 /* Info.plist */,
 			);
@@ -166,7 +183,13 @@
 		1CCA89DD1B28575E0009C69E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				1CDD1E861B29BB3B00FA7741 /* 01d.png */,
+				1CD0EEC71B2B116500FBF35E /* light-thunderstrom.png */,
+				1CD0EEC51B2B0BE600FBF35E /* rain.png */,
+				1CD0EEC31B2B089B00FBF35E /* shower-rain.png */,
+				1CD0EEC11B2B033600FBF35E /* broken-clouds.png */,
+				1CD0EEBF1B2AFA8300FBF35E /* scattered-clouds.png */,
+				1CD0EEBD1B2AED6B00FBF35E /* few-clouds.png */,
+				1CDD1E861B29BB3B00FA7741 /* clear-sky.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -265,7 +288,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CDD1E871B29BB3B00FA7741 /* 01d.png in Resources */,
+				1CD0EEC01B2AFA8300FBF35E /* scattered-clouds.png in Resources */,
+				1CD0EEBE1B2AED6B00FBF35E /* few-clouds.png in Resources */,
+				1CD0EEC21B2B033600FBF35E /* broken-clouds.png in Resources */,
+				1CD0EEC41B2B089B00FBF35E /* shower-rain.png in Resources */,
+				1CDD1E871B29BB3B00FA7741 /* clear-sky.png in Resources */,
+				1CD0EEC81B2B116500FBF35E /* light-thunderstrom.png in Resources */,
+				1CD0EEC61B2B0BE600FBF35E /* rain.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C4B3A891B270264005D9232 /* WeatherSectorPlugIn.m in Sources */,
+				1CD0EEBC1B2ADDD600FBF35E /* JKInterpolationMath.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
