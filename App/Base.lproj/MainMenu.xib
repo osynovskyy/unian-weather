@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.QuartzComposerIBPlugin" version="7706"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
+            <connections>
+                <outlet property="delegate" destination="Voe-Tx-rLC" id="GzC-gU-4Uq"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
+            <connections>
+                <outlet property="quartzView" destination="MXu-HT-cta" id="EPs-Dc-Fzr"/>
+                <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+        <window title="App" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <rect key="contentRect" x="335" y="390" width="788" height="576"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <view key="contentView" id="EiT-Mj-1SZ">
+                <rect key="frame" x="0.0" y="0.0" width="788" height="576"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <qcView translatesAutoresizingMaskIntoConstraints="NO" id="MXu-HT-cta">
+                        <rect key="frame" x="0.0" y="0.0" width="788" height="576"/>
+                        <color key="eraseColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </qcView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="MXu-HT-cta" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="4LC-VM-ozY"/>
+                    <constraint firstAttribute="bottom" secondItem="MXu-HT-cta" secondAttribute="bottom" id="NtZ-rE-Tu8"/>
+                    <constraint firstItem="MXu-HT-cta" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="PvS-7X-hAq"/>
+                    <constraint firstAttribute="trailing" secondItem="MXu-HT-cta" secondAttribute="trailing" id="Y85-bB-1xf"/>
+                </constraints>
+            </view>
+        </window>
+        <menuItem title="Application" id="DR3-Gk-Xzj">
+            <modifierMask key="keyEquivalentModifierMask"/>
+            <menu key="submenu" title="Application" id="Bcl-rQ-chu">
+                <items>
+                    <menuItem title="About Application" id="KyN-CZ-DEl">
+                        <modifierMask key="keyEquivalentModifierMask"/>
+                        <connections>
+                            <action selector="orderFrontStandardAboutPanel:" target="-1" id="X99-S2-uva"/>
+                        </connections>
+                    </menuItem>
+                    <menuItem isSeparatorItem="YES" id="FzF-y7-xCR"/>
+                    <menuItem title="Preferences…" keyEquivalent="," id="kbr-eN-kZt"/>
+                    <menuItem isSeparatorItem="YES" id="Dp8-G3-1oF"/>
+                    <menuItem title="Services" id="0hj-Lm-Vdf">
+                        <modifierMask key="keyEquivalentModifierMask"/>
+                        <menu key="submenu" title="Services" systemMenu="services" id="PdO-gV-GHl"/>
+                    </menuItem>
+                    <menuItem isSeparatorItem="YES" id="2vY-6C-wpq"/>
+                    <menuItem title="Hide Application" keyEquivalent="h" id="5zd-75-uLv">
+                        <connections>
+                            <action selector="hide:" target="-1" id="Z0m-SW-vzR"/>
+                        </connections>
+                    </menuItem>
+                    <menuItem title="Hide Others" keyEquivalent="h" id="YPW-Yj-mKx">
+                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                        <connections>
+                            <action selector="hideOtherApplications:" target="-1" id="hkW-FH-5TV"/>
+                        </connections>
+                    </menuItem>
+                    <menuItem title="Show All" id="vrt-Od-W9s">
+                        <modifierMask key="keyEquivalentModifierMask"/>
+                        <connections>
+                            <action selector="unhideAllApplications:" target="-1" id="SUr-hd-1cb"/>
+                        </connections>
+                    </menuItem>
+                    <menuItem isSeparatorItem="YES" id="KkQ-tX-eYH"/>
+                    <menuItem title="Quit Application" keyEquivalent="q" id="677-DJ-4ES">
+                        <connections>
+                            <action selector="terminate:" target="-1" id="NSe-rF-09k"/>
+                        </connections>
+                    </menuItem>
+                </items>
+            </menu>
+        </menuItem>
+    </objects>
+</document>
