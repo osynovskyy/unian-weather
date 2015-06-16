@@ -10,6 +10,7 @@
 #import <OpenGL/CGLMacro.h>
 
 #import "WeatherSectorPlugIn.h"
+#import "WeatherCodes.h"
 
 #import "JKInterpolationMath.h"
 
@@ -172,7 +173,7 @@
     
     //Draw Icon
     
-    NSString *pathToIcon = [[NSBundle bundleForClass:[self class]] pathForResource:self.icon ofType:@"png"];
+    NSString *pathToIcon = [[NSBundle bundleForClass:[self class]] pathForResource: [[WeatherCodes codes] objectForKey:self.icon] ofType:@"png"];
     
     CGDataProviderRef dataProvider = CGDataProviderCreateWithFilename([pathToIcon cStringUsingEncoding:NSMacOSRomanStringEncoding]);
     
@@ -216,7 +217,7 @@
     
     CGContextSetShouldAntialias(context, YES);
     CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
-    CGContextDrawImage(context, CGRectMake(25, 40, 50, 50), icon);
+    CGContextDrawImage(context, CGRectMake(21, 36, 58, 58), icon);
     
     CGImageRelease(icon);
     
