@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Oleksii Osynovskyi. All rights reserved.
 //
 
-#import <Quartz/Quartz.h>
-#include <Accelerate/Accelerate.h>
+@import Quartz;
+@import Accelerate;
 
 #define degreesToRadians( degrees ) ( ( degrees ) / 180.0 * M_PI )
 

@@ -378,6 +378,13 @@
                  };
     }
     
+    if ([key isEqualToString:@"outputMask"]) {
+        return @{
+                 QCPortAttributeNameKey: @"Mask",
+                 QCPortAttributeTypeKey: QCPortTypeImage
+                 };
+    }
+    
 	return nil;
 }
 
