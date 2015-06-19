@@ -79,6 +79,10 @@
 
 }
 
+//optimization
+@property BOOL needUpdate;
+@property vImage_Buffer renderBuffer;
+
 @property double scale;
 
 @property NSString *icon;
@@ -89,22 +93,20 @@
 @property double temperature;
 @property CGColorRef backgroundColor;
 
-- (instancetype) initWithRadius: (double) radius;
+- (void) clean;
 
 @end
 
 @implementation SectorImageProvider
 
-- (instancetype)initWithRadius:(double)radius {
-    {
-        self = [super init];
-        
-        if (self) {
-            self.radius = radius;
-        }
-        
-        return self;
+- (instancetype)init {
+    self = [super init];
+    
+    if (self) {
+        self.needUpdate = YES;
     }
+    
+    return self;
 }
 
 - (NSRect)imageBounds {
@@ -125,129 +127,176 @@
 
 - (BOOL)renderToBuffer:(void *)baseAddress withBytesPerRow:(NSUInteger)rowBytes pixelFormat:(NSString *)format forBounds:(NSRect)bounds {
     
+//    if (_renderBuffer.data == NULL || self.needUpdate) { //Render buffer not created yet, creating
+//        _renderBuffer.data = malloc(bounds.size.height*rowBytes);
+//        _renderBuffer.width = bounds.size.width;
+//        _renderBuffer.height = bounds.size.height;
+//        _renderBuffer.rowBytes = rowBytes;
+//        
+//        self.needUpdate = YES;
+//    }
     
-    CGContextRef context = CGBitmapContextCreate(baseAddress, bounds.size.width, bounds.size.height, 8, rowBytes, [self imageColorSpace], kCGImageAlphaPremultipliedLast | kCGBitmapByteOrderDefault);
+    // Declaring destination buffer
+    vImage_Buffer destBuffer;
+    destBuffer.data = baseAddress;
+    destBuffer.width = bounds.size.width;
+    destBuffer.height = bounds.size.height;
+    destBuffer.rowBytes = rowBytes;
     
-    CGContextClearRect(context, bounds);
-    
-    // Base 100px and scaling for any size
-    
-    double scale = (MAX(bounds.size.width, bounds.size.height)/100);
-    
-    CGContextScaleCTM(context, scale, scale);
-    
-    double animation = self.scale;
-    double offset = 50*(1-animation);
-    
-    CGContextTranslateCTM(context, offset, offset);
-    CGContextScaleCTM(context, animation, animation);
-    
-    const CGFloat *colorComponets = CGColorGetComponents(self.backgroundColor);
-    
-    CGContextSetRGBFillColor(context, colorComponets[2], colorComponets[1], colorComponets[0], colorComponets[3]); //BGRA8
-    
-    CGContextFillEllipseInRect(context, CGRectMake(3, 3, 94, 94));
-    
-    
-    //Drawing temperature text
-    
-    CGContextSelectFont(context, "PF DinDisplay Pro Medium", 22, kCGEncodingMacRoman);
-    
-    CGContextSetFillColorWithColor(context, [NSColor whiteColor].CGColor);
-    
-    NSString *tempString = [NSString stringWithFormat:@"%@%.1f˚", self.temperature >= 0? @" " : @"",roundf(self.temperature*10.0)/10.0];
-    
-    NSDictionary *attribs = @{NSFontAttributeName: [NSFont fontWithName:@"PF DinDisplay Pro Medium" size:22]};
-    
-    NSSize textSize = [tempString sizeWithAttributes:attribs];
-    
-    CGContextShowTextAtPoint(context, 50-textSize.width/2, 15, [tempString cStringUsingEncoding:NSMacOSRomanStringEncoding], [tempString length]);
-    
-    //Draw horizontal line
-    
-    NSBezierPath *hLine = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(15, 35, 70, 1) xRadius:0.5 yRadius:0.5];
-    
-    CGContextAddPath(context, [hLine quartzPath]);
-    
-    CGContextDrawPath(context, kCGPathFill);
-    
-    //Draw Icon
-    
-    NSString *pathToIcon = [[NSBundle bundleForClass:[self class]] pathForResource: [[WeatherCodes codes] objectForKey:self.icon] ofType:@"png"];
-    
-    CGDataProviderRef dataProvider = CGDataProviderCreateWithFilename([pathToIcon cStringUsingEncoding:NSMacOSRomanStringEncoding]);
-    
-    CGImageRef icon = CGImageCreateWithPNGDataProvider(dataProvider, NULL, NO, kCGRenderingIntentDefault);
-    
-    vImage_Buffer srcBuffer, destBuffer;
-    
-    vImage_CGImageFormat iconFormat = {
-        .bitsPerComponent = (unsigned int)CGImageGetBitsPerComponent(icon),
-        .bitsPerPixel = (unsigned int)CGImageGetBitsPerPixel(icon),
-        .colorSpace = CGImageGetColorSpace(icon),
-        .bitmapInfo = CGImageGetBitmapInfo(icon),
-        .version = 0,
-        .decode = NULL,
-        .renderingIntent = kCGRenderingIntentDefault
-    };
-    
-    vImageBuffer_InitWithCGImage(&srcBuffer, &iconFormat, NULL, icon, kvImageNoFlags);
+    if (self.needUpdate) {
+        
+        [self clean];
+        
+        _renderBuffer.data = malloc(bounds.size.height*rowBytes);
+        _renderBuffer.rowBytes = rowBytes;
+        _renderBuffer.width = bounds.size.width;
+        _renderBuffer.height = bounds.size.height;
+        
+        CGContextRef context = CGBitmapContextCreate(_renderBuffer.data, bounds.size.width, bounds.size.height, 8, rowBytes, [self imageColorSpace], kCGImageAlphaPremultipliedLast | kCGBitmapByteOrderDefault);
+        
+        CGContextClearRect(context, bounds);
+        
+        // Base 100px and scaling for any size
+        
+        double scale = (MAX(bounds.size.width, bounds.size.height)/100);
+        
+        CGContextScaleCTM(context, scale, scale);
+        
+        double animation = self.scale;
+        double offset = 50*(1-animation);
+        
+        CGContextTranslateCTM(context, offset, offset);
+        CGContextScaleCTM(context, animation, animation);
+        
+        const CGFloat *colorComponets = CGColorGetComponents(self.backgroundColor);
+        
+        CGContextSetRGBFillColor(context, colorComponets[2], colorComponets[1], colorComponets[0], colorComponets[3]); //BGRA8
+        
+        CGContextFillEllipseInRect(context, CGRectMake(3, 3, 94, 94));
+        
+        
+        //Drawing temperature text
+        
+        CGContextSelectFont(context, "PF DinDisplay Pro Medium", 22, kCGEncodingMacRoman);
+        
+        CGContextSetFillColorWithColor(context, [NSColor whiteColor].CGColor);
+        
+        NSString *tempString = [NSString stringWithFormat:@"%@%.1f˚", self.temperature >= 0? @" " : @"",roundf(self.temperature*10.0)/10.0];
+        
+        NSDictionary *attribs = @{NSFontAttributeName: [NSFont fontWithName:@"PF DinDisplay Pro Medium" size:22]};
+        
+        NSSize textSize = [tempString sizeWithAttributes:attribs];
+        
+        CGContextShowTextAtPoint(context, 50-textSize.width/2, 15, [tempString cStringUsingEncoding:NSMacOSRomanStringEncoding], [tempString length]);
+        
+        //Draw horizontal line
+        
+        NSBezierPath *hLine = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(15, 35, 70, 1) xRadius:0.5 yRadius:0.5];
+        
+        CGContextAddPath(context, [hLine quartzPath]);
+        
+        CGContextDrawPath(context, kCGPathFill);
+        
+        //Draw Icon
+        
+        NSString *pathToIcon = [[NSBundle bundleForClass:[self class]] pathForResource: [[WeatherCodes codes] objectForKey:self.icon] ofType:@"png"];
+        
+        CGDataProviderRef dataProvider = CGDataProviderCreateWithFilename([pathToIcon cStringUsingEncoding:NSMacOSRomanStringEncoding]);
+        
+        CGImageRef icon = CGImageCreateWithPNGDataProvider(dataProvider, NULL, NO, kCGRenderingIntentDefault);
+        
+        vImage_Buffer srcBuffer, destBuffer;
+        
+        vImage_CGImageFormat iconFormat = {
+            .bitsPerComponent = (unsigned int)CGImageGetBitsPerComponent(icon),
+            .bitsPerPixel = (unsigned int)CGImageGetBitsPerPixel(icon),
+            .colorSpace = CGImageGetColorSpace(icon),
+            .bitmapInfo = CGImageGetBitmapInfo(icon),
+            .version = 0,
+            .decode = NULL,
+            .renderingIntent = kCGRenderingIntentDefault
+        };
+        
+        vImageBuffer_InitWithCGImage(&srcBuffer, &iconFormat, NULL, icon, kvImageNoFlags);
+        
+        CGImageRelease(icon);
+        
+        void *pixelBuffer = malloc(srcBuffer.rowBytes*srcBuffer.height);
+        if (NULL == pixelBuffer)
+            return NO;
+        
+        destBuffer.data = pixelBuffer;
+        destBuffer.width = srcBuffer.width;
+        destBuffer.height = srcBuffer.height;
+        destBuffer.rowBytes = srcBuffer.rowBytes;
+        
+        vImage_Error vError;
+        
+        const uint8_t map[4] = { 2, 1, 0, 3 };
+        vError = vImagePermuteChannels_ARGB8888(&srcBuffer, &destBuffer, map, kvImageNoFlags);
+        
+        free(srcBuffer.data);
+        
+        icon = vImageCreateCGImageFromBuffer(&destBuffer, &iconFormat, NULL, NULL, kvImageNoFlags, &vError);
+        
+        free(destBuffer.data);
+        
+        CGContextSetShouldAntialias(context, YES);
+        CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
+        CGContextDrawImage(context, CGRectMake(21, 36, 58, 58), icon);
+        
+        CGImageRelease(icon);
+        
+        //Drawing wind
+        
+        const CGFloat *inWindColorComponents = CGColorGetComponents(self.windColor);
+        
+        CGFloat windColorComponets[] = {inWindColorComponents[2], inWindColorComponents[1], inWindColorComponents[0], inWindColorComponents[3]};
+        
+        CGColorRef windColor = CGColorCreate(self.imageColorSpace, windColorComponets);
+        
+        CGContextSetStrokeColorWithColor(context, windColor);
+        CGContextSetLineWidth(context, 6);
+        
+        CGContextBeginPath(context);
+        
+        CGFloat radStrength = degreesToRadians(self.windStrength);
+        CGFloat radDirection = -degreesToRadians(self.windDirection-90);
+        
+        CGContextAddArc(context, 50, 50, 47, radDirection+radStrength/2, radDirection-radStrength/2, 1);
+        
+        CGContextStrokePath(context);
+        
+        //Release context
+        
+        CGContextRelease(context);
+        
+        self.needUpdate = NO;
+    }
 
-    CGImageRelease(icon);
-    
-    void *pixelBuffer = malloc(srcBuffer.rowBytes*srcBuffer.height);
-    if (NULL == pixelBuffer)
+    //Final copy render buffer to destination buffer
+    vImage_Error error = vImageCopyBuffer(&_renderBuffer, &destBuffer, 4, kvImageNoFlags);
+    if (error) {
+        NSLog(@"Error: vImageCopyBuffer — %ld", error);
         return NO;
-    
-    destBuffer.data = pixelBuffer;
-    destBuffer.width = srcBuffer.width;
-    destBuffer.height = srcBuffer.height;
-    destBuffer.rowBytes = srcBuffer.rowBytes;
-    
-    vImage_Error vError;
-    
-    const uint8_t map[4] = { 2, 1, 0, 3 };
-    vError = vImagePermuteChannels_ARGB8888(&srcBuffer, &destBuffer, map, kvImageNoFlags);
-    
-    free(srcBuffer.data);
-    
-    icon = vImageCreateCGImageFromBuffer(&destBuffer, &iconFormat, NULL, NULL, kvImageNoFlags, &vError);
-
-    free(destBuffer.data);
-    
-    CGContextSetShouldAntialias(context, YES);
-    CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
-    CGContextDrawImage(context, CGRectMake(21, 36, 58, 58), icon);
-    
-    CGImageRelease(icon);
-    
-    //Drawing wind
-    
-    const CGFloat *inWindColorComponents = CGColorGetComponents(self.windColor);
-    
-    CGFloat windColorComponets[] = {inWindColorComponents[2], inWindColorComponents[1], inWindColorComponents[0], inWindColorComponents[3]};
-    
-    CGColorRef windColor = CGColorCreate(self.imageColorSpace, windColorComponets);
-    
-    CGContextSetStrokeColorWithColor(context, windColor);
-    CGContextSetLineWidth(context, 6);
-    
-    CGContextBeginPath(context);
-    
-    CGFloat radStrength = degreesToRadians(self.windStrength);
-    CGFloat radDirection = -degreesToRadians(self.windDirection-90);
-    
-    CGContextAddArc(context, 50, 50, 47, radDirection+radStrength/2, radDirection-radStrength/2, 1);
-
-    
-    CGContextStrokePath(context);
-
-    //Release context
-    
-    CGContextRelease(context);
+    }
     
     return YES;
 }
+
+- (void)clean {
+    free(_renderBuffer.data);
+    _renderBuffer.width = 0;
+    _renderBuffer.height = 0;
+    _renderBuffer.rowBytes = 0;
+}
+
+@end
+
+@interface WeatherSectorPlugIn () {
+}
+
+@property SectorImageProvider *provider;
 
 @end
 
@@ -318,7 +367,7 @@
         return @{
                  QCPortAttributeNameKey: @"Icon",
                  QCPortAttributeTypeKey: QCPortTypeString,
-                 QCPortAttributeDefaultValueKey: @"clear-sky"
+                 QCPortAttributeDefaultValueKey: @"200"
                  };
     }
     
@@ -409,7 +458,9 @@
 	// Called by Quartz Composer when rendering of the composition starts: perform any required setup for the plug-in.
 	// Return NO in case of fatal failure (this will prevent rendering of the composition to start).
 //    CGLContextObj cgl_ctx = [context CGLContextObj];
-	
+    
+    self.provider = [[SectorImageProvider alloc] init]; //default value
+    
 	return YES;
 }
 
@@ -439,29 +490,42 @@
             CGFloat t = (time - self.inputInPoint)/self.inputAnimationDuration;
             
             animation = JKCubicInOutInterpolation(t, 0, 1);
+            self.provider.needUpdate = YES;
         } else if (time >= self.inputOutPoint && time <= self.inputOutPoint+self.inputAnimationDuration) {
             
             CGFloat t = (time - self.inputOutPoint)/self.inputAnimationDuration;
             
             animation = JKCubicInOutInterpolation(t, 1, 0);
+            self.provider.needUpdate = YES;
         }
     }
     
-    SectorImageProvider* provider;
-
-    provider = [[SectorImageProvider alloc] initWithRadius: self.inputRadius];
+    if ([self didValueForInputKeyChange:@"inputRadius"] ||
+        [self didValueForInputKeyChange:@"inputAnimationEnable"] ||
+        [self didValueForInputKeyChange:@"inputInPoint"] ||
+        [self didValueForInputKeyChange:@"inputOutPoint"] ||
+        [self didValueForInputKeyChange:@"inputAnimationDuration"] ||
+        [self didValueForInputKeyChange:@"inputIcon"] ||
+        [self didValueForInputKeyChange:@"inputTemp"] ||
+        [self didValueForInputKeyChange:@"inputWindDirection"] ||
+        [self didValueForInputKeyChange:@"inputWindStrength"] ||
+        [self didValueForInputKeyChange:@"inputWindColor"] ||
+        [self didValueForInputKeyChange:@"inputBackgroundColor"])
+        self.provider.needUpdate = YES;
     
-    provider.scale = animation;
+    self.provider.radius = self.inputRadius;
     
-    provider.icon = self.inputIcon;
+    self.provider.scale = animation;
     
-    provider.backgroundColor = self.inputBackgroundColor;
-    provider.temperature = self.inputTemp;
-    provider.windDirection = self.inputWindDirection;
-    provider.windStrength = self.inputWindStrength;
-    provider.windColor = self.inputWindColor;
+    self.provider.icon = self.inputIcon;
     
-    self.outputSector = provider;
+    self.provider.backgroundColor = self.inputBackgroundColor;
+    self.provider.temperature = self.inputTemp;
+    self.provider.windDirection = self.inputWindDirection;
+    self.provider.windStrength = self.inputWindStrength;
+    self.provider.windColor = self.inputWindColor;
+    
+    self.outputSector = self.provider;
     
 	return YES;
 }

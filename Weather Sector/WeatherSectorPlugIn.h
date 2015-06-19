@@ -19,19 +19,20 @@
 //@property double inputFoo;
 //@property (copy) NSString* outputBar;
 
+@property (assign) double inputRadius;
+
 @property (assign) BOOL inputAnimationEnable;
 @property (assign) double inputInPoint;
 @property (assign) double inputOutPoint;
 @property (assign) double inputAnimationDuration;
 
 @property (assign) NSString *inputIcon;
-@property (assign) double inputRadius;
 @property (assign) double inputTemp;
 @property (assign) double inputWindDirection;
 @property (assign) double inputWindStrength;
 @property (assign) CGColorRef inputWindColor;
 @property (assign) CGColorRef inputBackgroundColor;
 
-@property (copy) id<QCPlugInOutputImageProvider> outputSector;
+@property (assign) id<QCPlugInOutputImageProvider> outputSector;
 
 @end
