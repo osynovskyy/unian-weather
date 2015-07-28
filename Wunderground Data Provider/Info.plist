@@ -24,7 +24,7 @@
 	<string>Copyright © 2015 Oleksii Osynovskyi. All rights reserved.</string>
 	<key>QCPlugInClasses</key>
 	<array>
-		<string>WeatherMapPlugIn</string>
+		<string>Wunderground_Data_ProviderPlugIn</string>
 	</array>
 </dict>
 </plist>

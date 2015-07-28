@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C1C703A1B32F58B00835343 /* WeatherMapPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1C70391B32F58B00835343 /* WeatherMapPlugIn.m */; };
-		1C1C70411B32F5BD00835343 /* ua-map-outlines-cities.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1C703F1B32F5BD00835343 /* ua-map-outlines-cities.png */; };
-		1C1C70421B32F5BD00835343 /* ua-map.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1C70401B32F5BD00835343 /* ua-map.png */; };
-		1C1C70451B32F5CD00835343 /* WeatherMapImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1C70441B32F5CD00835343 /* WeatherMapImageProvider.m */; };
+		1C3A109E1B382B9500082106 /* ForecastIO_Data_ProviderPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3A109D1B382B9500082106 /* ForecastIO_Data_ProviderPlugIn.m */; };
 		1C4A22811B2F231500261DB8 /* broken-clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4A225E1B2F231500261DB8 /* broken-clouds.png */; };
 		1C4A22821B2F231500261DB8 /* scattered-clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4A225F1B2F231500261DB8 /* scattered-clouds.png */; };
 		1C4A22831B2F231500261DB8 /* few-clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4A22601B2F231500261DB8 /* few-clouds.png */; };
@@ -46,26 +43,70 @@
 		1C4A22A11B2F231500261DB8 /* heavy-thunderstorm.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4A227E1B2F231500261DB8 /* heavy-thunderstorm.png */; };
 		1C4A22A21B2F231500261DB8 /* thunderstorm.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4A227F1B2F231500261DB8 /* thunderstorm.png */; };
 		1C4A22A31B2F231500261DB8 /* light-thunderstorm.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4A22801B2F231500261DB8 /* light-thunderstorm.png */; };
-		1C4A22A61B2F243F00261DB8 /* WeatherCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4A22A51B2F243F00261DB8 /* WeatherCodes.m */; };
 		1C4B3A891B270264005D9232 /* WeatherSectorPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4B3A881B270264005D9232 /* WeatherSectorPlugIn.m */; };
 		1C4B3A9F1B273613005D9232 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4B3A9E1B273613005D9232 /* AppDelegate.m */; };
 		1C4B3AA11B273613005D9232 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4B3AA01B273613005D9232 /* main.m */; };
 		1C4B3AA31B273613005D9232 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C4B3AA21B273613005D9232 /* Images.xcassets */; };
 		1C4B3ABE1B27382E005D9232 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4B3ABB1B27380E005D9232 /* Quartz.framework */; };
 		1C4B3AC01B273B0B005D9232 /* composition.qtz in Resources */ = {isa = PBXBuildFile; fileRef = 1C4B3ABF1B273B0B005D9232 /* composition.qtz */; };
-		1CAFABC31B330DED007B6649 /* west-8.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CAFABBB1B330DED007B6649 /* west-8.png */; };
-		1CAFABC41B330DED007B6649 /* west-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CAFABBC1B330DED007B6649 /* west-7.png */; };
-		1CAFABC51B330DED007B6649 /* west-6.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CAFABBD1B330DED007B6649 /* west-6.png */; };
-		1CAFABC61B330DED007B6649 /* west-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CAFABBE1B330DED007B6649 /* west-5.png */; };
-		1CAFABC71B330DED007B6649 /* west-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CAFABBF1B330DED007B6649 /* west-4.png */; };
-		1CAFABC81B330DED007B6649 /* west-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CAFABC01B330DED007B6649 /* west-3.png */; };
-		1CAFABC91B330DED007B6649 /* west-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CAFABC11B330DED007B6649 /* west-2.png */; };
-		1CAFABCA1B330DED007B6649 /* west-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CAFABC21B330DED007B6649 /* west-1.png */; };
+		1C84D64E1B34368F003739C6 /* OpenWeather_Data_ProviderPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C84D64D1B34368F003739C6 /* OpenWeather_Data_ProviderPlugIn.m */; };
+		1C9173951B38588200D1A2E1 /* Wunderground_Data_ProviderPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C9173941B38588200D1A2E1 /* Wunderground_Data_ProviderPlugIn.m */; };
+		1CA3CE8F1B3C6A8C00544525 /* QuartzOfflineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3CE8E1B3C6A8C00544525 /* QuartzOfflineRenderer.m */; };
+		1CC87CCA1B3C422A0044C1BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC87CC91B3C422A0044C1BA /* main.m */; };
 		1CD0EEBC1B2ADDD600FBF35E /* JKInterpolationMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD0EEBB1B2ADDD600FBF35E /* JKInterpolationMath.m */; };
 		1CE5DBBD1B28348D00F14EC7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C4B3AA41B273613005D9232 /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1C3A10A21B382C0800082106 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C4B3A791B270264005D9232 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C3A10971B382B9500082106;
+			remoteInfo = "ForecastIO Data Provider";
+		};
+		1C64FF501B3F0D880079C37C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C4B3A791B270264005D9232 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C91738E1B38588200D1A2E1;
+			remoteInfo = "Wunderground Data Provider";
+		};
+		1C64FF521B3F0D890079C37C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C4B3A791B270264005D9232 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C3A10971B382B9500082106;
+			remoteInfo = "ForecastIO Data Provider";
+		};
+		1C64FF541B3F0D8A0079C37C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C4B3A791B270264005D9232 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C84D6471B34368F003739C6;
+			remoteInfo = "OpenWeather Data Provider";
+		};
+		1C64FF561B3F0D8D0079C37C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C4B3A791B270264005D9232 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C4B3A811B270264005D9232;
+			remoteInfo = "Weather Sector";
+		};
+		1C84D6521B34369D003739C6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C4B3A791B270264005D9232 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C84D6471B34368F003739C6;
+			remoteInfo = "OpenWeather Data Provider";
+		};
+		1C9173991B38588C00D1A2E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C4B3A791B270264005D9232 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C91738E1B38588200D1A2E1;
+			remoteInfo = "Wunderground Data Provider";
+		};
 		1CCA89F11B286A440009C69E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1C4B3A791B270264005D9232 /* Project object */;
@@ -73,24 +114,25 @@
 			remoteGlobalIDString = 1C4B3A811B270264005D9232;
 			remoteInfo = "Weather Sector";
 		};
-		1CFD98771B32F76E000C91D5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1C4B3A791B270264005D9232 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1C1C70331B32F58B00835343;
-			remoteInfo = WeatherMap;
-		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1CC87CC51B3C422A0044C1BA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		1C1C70341B32F58B00835343 /* WeatherMap.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherMap.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
-		1C1C70371B32F58B00835343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1C1C70381B32F58B00835343 /* WeatherMapPlugIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherMapPlugIn.h; sourceTree = "<group>"; };
-		1C1C70391B32F58B00835343 /* WeatherMapPlugIn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherMapPlugIn.m; sourceTree = "<group>"; };
-		1C1C703F1B32F5BD00835343 /* ua-map-outlines-cities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ua-map-outlines-cities.png"; path = "Resources/ua-map-outlines-cities.png"; sourceTree = "<group>"; };
-		1C1C70401B32F5BD00835343 /* ua-map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ua-map.png"; path = "Resources/ua-map.png"; sourceTree = "<group>"; };
-		1C1C70431B32F5CD00835343 /* WeatherMapImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherMapImageProvider.h; sourceTree = "<group>"; };
-		1C1C70441B32F5CD00835343 /* WeatherMapImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherMapImageProvider.m; sourceTree = "<group>"; };
+		1C3A10981B382B9500082106 /* ForecastIO Data Provider.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ForecastIO Data Provider.plugin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C3A109B1B382B9500082106 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C3A109C1B382B9500082106 /* ForecastIO_Data_ProviderPlugIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ForecastIO_Data_ProviderPlugIn.h; sourceTree = "<group>"; };
+		1C3A109D1B382B9500082106 /* ForecastIO_Data_ProviderPlugIn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForecastIO_Data_ProviderPlugIn.m; sourceTree = "<group>"; };
 		1C4A225E1B2F231500261DB8 /* broken-clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "broken-clouds.png"; path = "Resources/broken-clouds.png"; sourceTree = "<group>"; };
 		1C4A225F1B2F231500261DB8 /* scattered-clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "scattered-clouds.png"; path = "Resources/scattered-clouds.png"; sourceTree = "<group>"; };
 		1C4A22601B2F231500261DB8 /* few-clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "few-clouds.png"; path = "Resources/few-clouds.png"; sourceTree = "<group>"; };
@@ -126,8 +168,6 @@
 		1C4A227E1B2F231500261DB8 /* heavy-thunderstorm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "heavy-thunderstorm.png"; path = "Resources/heavy-thunderstorm.png"; sourceTree = "<group>"; };
 		1C4A227F1B2F231500261DB8 /* thunderstorm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = thunderstorm.png; path = Resources/thunderstorm.png; sourceTree = "<group>"; };
 		1C4A22801B2F231500261DB8 /* light-thunderstorm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "light-thunderstorm.png"; path = "Resources/light-thunderstorm.png"; sourceTree = "<group>"; };
-		1C4A22A41B2F243F00261DB8 /* WeatherCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherCodes.h; sourceTree = "<group>"; };
-		1C4A22A51B2F243F00261DB8 /* WeatherCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherCodes.m; sourceTree = "<group>"; };
 		1C4B3A821B270264005D9232 /* Weather Sector.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Weather Sector.plugin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C4B3A861B270264005D9232 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C4B3A871B270264005D9232 /* WeatherSectorPlugIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherSectorPlugIn.h; sourceTree = "<group>"; };
@@ -142,14 +182,19 @@
 		1C4B3ABB1B27380E005D9232 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		1C4B3ABF1B273B0B005D9232 /* composition.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = composition.qtz; sourceTree = "<group>"; };
 		1C4B3AC91B274AEE005D9232 /* ArgumentKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArgumentKeys.h; sourceTree = "<group>"; };
-		1CAFABBB1B330DED007B6649 /* west-8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "west-8.png"; path = "Resources/west-8.png"; sourceTree = "<group>"; };
-		1CAFABBC1B330DED007B6649 /* west-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "west-7.png"; path = "Resources/west-7.png"; sourceTree = "<group>"; };
-		1CAFABBD1B330DED007B6649 /* west-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "west-6.png"; path = "Resources/west-6.png"; sourceTree = "<group>"; };
-		1CAFABBE1B330DED007B6649 /* west-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "west-5.png"; path = "Resources/west-5.png"; sourceTree = "<group>"; };
-		1CAFABBF1B330DED007B6649 /* west-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "west-4.png"; path = "Resources/west-4.png"; sourceTree = "<group>"; };
-		1CAFABC01B330DED007B6649 /* west-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "west-3.png"; path = "Resources/west-3.png"; sourceTree = "<group>"; };
-		1CAFABC11B330DED007B6649 /* west-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "west-2.png"; path = "Resources/west-2.png"; sourceTree = "<group>"; };
-		1CAFABC21B330DED007B6649 /* west-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "west-1.png"; path = "Resources/west-1.png"; sourceTree = "<group>"; };
+		1C84D6481B34368F003739C6 /* OpenWeather Data Provider.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenWeather Data Provider.plugin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C84D64B1B34368F003739C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C84D64C1B34368F003739C6 /* OpenWeather_Data_ProviderPlugIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenWeather_Data_ProviderPlugIn.h; sourceTree = "<group>"; };
+		1C84D64D1B34368F003739C6 /* OpenWeather_Data_ProviderPlugIn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenWeather_Data_ProviderPlugIn.m; sourceTree = "<group>"; };
+		1C91738F1B38588200D1A2E1 /* Wunderground Data Provider.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Wunderground Data Provider.plugin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C9173921B38588200D1A2E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C9173931B38588200D1A2E1 /* Wunderground_Data_ProviderPlugIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wunderground_Data_ProviderPlugIn.h; sourceTree = "<group>"; };
+		1C9173941B38588200D1A2E1 /* Wunderground_Data_ProviderPlugIn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Wunderground_Data_ProviderPlugIn.m; sourceTree = "<group>"; };
+		1CA3CE8D1B3C6A8C00544525 /* QuartzOfflineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuartzOfflineRenderer.h; sourceTree = "<group>"; };
+		1CA3CE8E1B3C6A8C00544525 /* QuartzOfflineRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuartzOfflineRenderer.m; sourceTree = "<group>"; };
+		1CC87CC71B3C422A0044C1BA /* Weather-Automator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Weather-Automator"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CC87CC91B3C422A0044C1BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1CC8E1A01B43D1B700BF2707 /* com.osynovskyy.weather-automator.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "com.osynovskyy.weather-automator.plist"; sourceTree = "<group>"; };
 		1CD0EEBA1B2ADDD600FBF35E /* JKInterpolationMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKInterpolationMath.h; sourceTree = "<group>"; };
 		1CD0EEBB1B2ADDD600FBF35E /* JKInterpolationMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKInterpolationMath.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,7 +207,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1C1C70301B32F58B00835343 /* Frameworks */ = {
+		1C3A10941B382B9500082106 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -177,45 +222,46 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1C84D6441B34368F003739C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C91738B1B38588200D1A2E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CC87CC41B3C422A0044C1BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1C1C70351B32F58B00835343 /* WeatherMap */ = {
+		1C3A10991B382B9500082106 /* ForecastIO Data Provider */ = {
 			isa = PBXGroup;
 			children = (
-				1C1C703E1B32F5B100835343 /* Resource */,
-				1C1C70431B32F5CD00835343 /* WeatherMapImageProvider.h */,
-				1C1C70441B32F5CD00835343 /* WeatherMapImageProvider.m */,
-				1C1C70381B32F58B00835343 /* WeatherMapPlugIn.h */,
-				1C1C70391B32F58B00835343 /* WeatherMapPlugIn.m */,
-				1C1C70361B32F58B00835343 /* Supporting Files */,
+				1C3A109C1B382B9500082106 /* ForecastIO_Data_ProviderPlugIn.h */,
+				1C3A109D1B382B9500082106 /* ForecastIO_Data_ProviderPlugIn.m */,
+				1C3A109A1B382B9500082106 /* Supporting Files */,
 			);
-			path = WeatherMap;
+			path = "ForecastIO Data Provider";
 			sourceTree = "<group>";
 		};
-		1C1C70361B32F58B00835343 /* Supporting Files */ = {
+		1C3A109A1B382B9500082106 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1C1C70371B32F58B00835343 /* Info.plist */,
+				1C3A109B1B382B9500082106 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		1C1C703E1B32F5B100835343 /* Resource */ = {
-			isa = PBXGroup;
-			children = (
-				1CAFABBB1B330DED007B6649 /* west-8.png */,
-				1CAFABBC1B330DED007B6649 /* west-7.png */,
-				1CAFABBD1B330DED007B6649 /* west-6.png */,
-				1CAFABBE1B330DED007B6649 /* west-5.png */,
-				1CAFABBF1B330DED007B6649 /* west-4.png */,
-				1CAFABC01B330DED007B6649 /* west-3.png */,
-				1CAFABC11B330DED007B6649 /* west-2.png */,
-				1CAFABC21B330DED007B6649 /* west-1.png */,
-				1C1C703F1B32F5BD00835343 /* ua-map-outlines-cities.png */,
-				1C1C70401B32F5BD00835343 /* ua-map.png */,
-			);
-			name = Resource;
 			sourceTree = "<group>";
 		};
 		1C4B3A781B270264005D9232 = {
@@ -223,7 +269,8 @@
 			children = (
 				1C4B3A841B270264005D9232 /* Weather Sector */,
 				1C4B3A9A1B273613005D9232 /* App */,
-				1C1C70351B32F58B00835343 /* WeatherMap */,
+				1C6EDD271B3C146A00ED1BD4 /* Data Providers */,
+				1CC87CC81B3C422A0044C1BA /* Weather-Automator */,
 				1C4B3A831B270264005D9232 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -233,7 +280,10 @@
 			children = (
 				1C4B3A821B270264005D9232 /* Weather Sector.plugin */,
 				1C4B3A991B273613005D9232 /* App.app */,
-				1C1C70341B32F58B00835343 /* WeatherMap.plugin */,
+				1C84D6481B34368F003739C6 /* OpenWeather Data Provider.plugin */,
+				1C3A10981B382B9500082106 /* ForecastIO Data Provider.plugin */,
+				1C91738F1B38588200D1A2E1 /* Wunderground Data Provider.plugin */,
+				1CC87CC71B3C422A0044C1BA /* Weather-Automator */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -252,8 +302,6 @@
 		1C4B3A851B270264005D9232 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1C4A22A41B2F243F00261DB8 /* WeatherCodes.h */,
-				1C4A22A51B2F243F00261DB8 /* WeatherCodes.m */,
 				1CD0EEBA1B2ADDD600FBF35E /* JKInterpolationMath.h */,
 				1CD0EEBB1B2ADDD600FBF35E /* JKInterpolationMath.m */,
 				1C4B3AC91B274AEE005D9232 /* ArgumentKeys.h */,
@@ -291,6 +339,63 @@
 				1C4B3ABB1B27380E005D9232 /* Quartz.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1C6EDD271B3C146A00ED1BD4 /* Data Providers */ = {
+			isa = PBXGroup;
+			children = (
+				1C84D6491B34368F003739C6 /* OpenWeather Data Provider */,
+				1C3A10991B382B9500082106 /* ForecastIO Data Provider */,
+				1C9173901B38588200D1A2E1 /* Wunderground Data Provider */,
+			);
+			name = "Data Providers";
+			sourceTree = "<group>";
+		};
+		1C84D6491B34368F003739C6 /* OpenWeather Data Provider */ = {
+			isa = PBXGroup;
+			children = (
+				1C84D64C1B34368F003739C6 /* OpenWeather_Data_ProviderPlugIn.h */,
+				1C84D64D1B34368F003739C6 /* OpenWeather_Data_ProviderPlugIn.m */,
+				1C84D64A1B34368F003739C6 /* Supporting Files */,
+			);
+			path = "OpenWeather Data Provider";
+			sourceTree = "<group>";
+		};
+		1C84D64A1B34368F003739C6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1C84D64B1B34368F003739C6 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1C9173901B38588200D1A2E1 /* Wunderground Data Provider */ = {
+			isa = PBXGroup;
+			children = (
+				1C9173931B38588200D1A2E1 /* Wunderground_Data_ProviderPlugIn.h */,
+				1C9173941B38588200D1A2E1 /* Wunderground_Data_ProviderPlugIn.m */,
+				1C9173911B38588200D1A2E1 /* Supporting Files */,
+			);
+			path = "Wunderground Data Provider";
+			sourceTree = "<group>";
+		};
+		1C9173911B38588200D1A2E1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1C9173921B38588200D1A2E1 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1CC87CC81B3C422A0044C1BA /* Weather-Automator */ = {
+			isa = PBXGroup;
+			children = (
+				1CC87CC91B3C422A0044C1BA /* main.m */,
+				1CA3CE8D1B3C6A8C00544525 /* QuartzOfflineRenderer.h */,
+				1CA3CE8E1B3C6A8C00544525 /* QuartzOfflineRenderer.m */,
+				1CC8E1A01B43D1B700BF2707 /* com.osynovskyy.weather-automator.plist */,
+			);
+			path = "Weather-Automator";
 			sourceTree = "<group>";
 		};
 		1CCA89DD1B28575E0009C69E /* Resources */ = {
@@ -338,22 +443,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1C1C70331B32F58B00835343 /* WeatherMap */ = {
+		1C3A10971B382B9500082106 /* ForecastIO Data Provider */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1C1C703B1B32F58B00835343 /* Build configuration list for PBXNativeTarget "WeatherMap" */;
+			buildConfigurationList = 1C3A10A11B382B9500082106 /* Build configuration list for PBXNativeTarget "ForecastIO Data Provider" */;
 			buildPhases = (
-				1C1C702F1B32F58B00835343 /* Sources */,
-				1C1C70301B32F58B00835343 /* Frameworks */,
-				1C1C70311B32F58B00835343 /* Resources */,
-				1C1C70321B32F58B00835343 /* ShellScript */,
+				1C3A10931B382B9500082106 /* Sources */,
+				1C3A10941B382B9500082106 /* Frameworks */,
+				1C3A10951B382B9500082106 /* Resources */,
+				1C3A10961B382B9500082106 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = WeatherMap;
-			productName = WeatherMap;
-			productReference = 1C1C70341B32F58B00835343 /* WeatherMap.plugin */;
+			name = "ForecastIO Data Provider";
+			productName = "ForecastIO Data Provider";
+			productReference = 1C3A10981B382B9500082106 /* ForecastIO Data Provider.plugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 		1C4B3A811B270264005D9232 /* Weather Sector */ = {
@@ -385,13 +490,73 @@
 			buildRules = (
 			);
 			dependencies = (
+				1C84D6531B34369D003739C6 /* PBXTargetDependency */,
+				1C91739A1B38588C00D1A2E1 /* PBXTargetDependency */,
+				1C3A10A31B382C0800082106 /* PBXTargetDependency */,
 				1CCA89F21B286A440009C69E /* PBXTargetDependency */,
-				1CFD98781B32F76E000C91D5 /* PBXTargetDependency */,
 			);
 			name = App;
 			productName = App;
 			productReference = 1C4B3A991B273613005D9232 /* App.app */;
 			productType = "com.apple.product-type.application";
+		};
+		1C84D6471B34368F003739C6 /* OpenWeather Data Provider */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C84D64F1B34368F003739C6 /* Build configuration list for PBXNativeTarget "OpenWeather Data Provider" */;
+			buildPhases = (
+				1C84D6431B34368F003739C6 /* Sources */,
+				1C84D6441B34368F003739C6 /* Frameworks */,
+				1C84D6451B34368F003739C6 /* Resources */,
+				1C84D6461B34368F003739C6 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OpenWeather Data Provider";
+			productName = "OpenWeather Data Provider";
+			productReference = 1C84D6481B34368F003739C6 /* OpenWeather Data Provider.plugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+		1C91738E1B38588200D1A2E1 /* Wunderground Data Provider */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C9173981B38588200D1A2E1 /* Build configuration list for PBXNativeTarget "Wunderground Data Provider" */;
+			buildPhases = (
+				1C91738A1B38588200D1A2E1 /* Sources */,
+				1C91738B1B38588200D1A2E1 /* Frameworks */,
+				1C91738C1B38588200D1A2E1 /* Resources */,
+				1C91738D1B38588200D1A2E1 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Wunderground Data Provider";
+			productName = "Wunderground Data Provider";
+			productReference = 1C91738F1B38588200D1A2E1 /* Wunderground Data Provider.plugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+		1CC87CC61B3C422A0044C1BA /* Weather-Automator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1CC87CCD1B3C422A0044C1BA /* Build configuration list for PBXNativeTarget "Weather-Automator" */;
+			buildPhases = (
+				1CC87CC31B3C422A0044C1BA /* Sources */,
+				1CC87CC41B3C422A0044C1BA /* Frameworks */,
+				1CC87CC51B3C422A0044C1BA /* CopyFiles */,
+				1CA3CE8C1B3C66D400544525 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1C64FF571B3F0D8D0079C37C /* PBXTargetDependency */,
+				1C64FF511B3F0D880079C37C /* PBXTargetDependency */,
+				1C64FF531B3F0D890079C37C /* PBXTargetDependency */,
+				1C64FF551B3F0D8A0079C37C /* PBXTargetDependency */,
+			);
+			name = "Weather-Automator";
+			productName = "Weather-Automator";
+			productReference = 1CC87CC71B3C422A0044C1BA /* Weather-Automator */;
+			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
@@ -399,10 +564,10 @@
 		1C4B3A791B270264005D9232 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Oleksii Osynovskyi";
 				TargetAttributes = {
-					1C1C70331B32F58B00835343 = {
+					1C3A10971B382B9500082106 = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
 					1C4B3A811B270264005D9232 = {
@@ -411,9 +576,18 @@
 					1C4B3A981B273613005D9232 = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
+					1C84D6471B34368F003739C6 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					1C91738E1B38588200D1A2E1 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					1CC87CC61B3C422A0044C1BA = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
 				};
 			};
-			buildConfigurationList = 1C4B3A7C1B270264005D9232 /* Build configuration list for PBXProject "Weather Sector" */;
+			buildConfigurationList = 1C4B3A7C1B270264005D9232 /* Build configuration list for PBXProject "Weather" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -426,28 +600,21 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1C4B3A811B270264005D9232 /* Weather Sector */,
 				1C4B3A981B273613005D9232 /* App */,
-				1C1C70331B32F58B00835343 /* WeatherMap */,
+				1C4B3A811B270264005D9232 /* Weather Sector */,
+				1C84D6471B34368F003739C6 /* OpenWeather Data Provider */,
+				1C3A10971B382B9500082106 /* ForecastIO Data Provider */,
+				1C91738E1B38588200D1A2E1 /* Wunderground Data Provider */,
+				1CC87CC61B3C422A0044C1BA /* Weather-Automator */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1C1C70311B32F58B00835343 /* Resources */ = {
+		1C3A10951B382B9500082106 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CAFABC81B330DED007B6649 /* west-3.png in Resources */,
-				1CAFABC41B330DED007B6649 /* west-7.png in Resources */,
-				1CAFABCA1B330DED007B6649 /* west-1.png in Resources */,
-				1CAFABC71B330DED007B6649 /* west-4.png in Resources */,
-				1C1C70421B32F5BD00835343 /* ua-map.png in Resources */,
-				1CAFABC61B330DED007B6649 /* west-5.png in Resources */,
-				1CAFABC91B330DED007B6649 /* west-2.png in Resources */,
-				1CAFABC51B330DED007B6649 /* west-6.png in Resources */,
-				1C1C70411B32F5BD00835343 /* ua-map-outlines-cities.png in Resources */,
-				1CAFABC31B330DED007B6649 /* west-8.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +625,20 @@
 				1C4B3AC01B273B0B005D9232 /* composition.qtz in Resources */,
 				1C4B3AA31B273613005D9232 /* Images.xcassets in Resources */,
 				1CE5DBBD1B28348D00F14EC7 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C84D6451B34368F003739C6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C91738C1B38588200D1A2E1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,7 +687,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1C1C70321B32F58B00835343 /* ShellScript */ = {
+		1C3A10961B382B9500082106 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -517,7 +698,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This shell script simply copies the built plug-in to \"~/Library/Graphics/Quartz Composer Plug-Ins\" and overrides any previous version at that location\n\nmkdir -p \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins\"\nrm -rf \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/WeatherMap.plugin\"\ncp -rf \"$BUILT_PRODUCTS_DIR/WeatherMap.plugin\" \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/\"\n";
+			shellScript = "# This shell script simply copies the built plug-in to \"~/Library/Graphics/Quartz Composer Plug-Ins\" and overrides any previous version at that location\n\nmkdir -p \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins\"\nrm -rf \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/ForecastIO Data Provider.plugin\"\ncp -rf \"$BUILT_PRODUCTS_DIR/ForecastIO Data Provider.plugin\" \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/\"\n";
 		};
 		1C4B3A801B270264005D9232 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -532,15 +713,53 @@
 			shellPath = /bin/sh;
 			shellScript = "# This shell script simply copies the built plug-in to \"~/Library/Graphics/Quartz Composer Plug-Ins\" and overrides any previous version at that location\n\nmkdir -p \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins\"\nrm -rf \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/Weather Sector.plugin\"\ncp -rf \"$BUILT_PRODUCTS_DIR/Weather Sector.plugin\" \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/\"\n";
 		};
+		1C84D6461B34368F003739C6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This shell script simply copies the built plug-in to \"~/Library/Graphics/Quartz Composer Plug-Ins\" and overrides any previous version at that location\n\nmkdir -p \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins\"\nrm -rf \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/OpenWeather Data Provider.plugin\"\ncp -rf \"$BUILT_PRODUCTS_DIR/OpenWeather Data Provider.plugin\" \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/\"\n";
+		};
+		1C91738D1B38588200D1A2E1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This shell script simply copies the built plug-in to \"~/Library/Graphics/Quartz Composer Plug-Ins\" and overrides any previous version at that location\n\nmkdir -p \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins\"\nrm -rf \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/Wunderground Data Provider.plugin\"\ncp -rf \"$BUILT_PRODUCTS_DIR/Wunderground Data Provider.plugin\" \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/\"\n";
+		};
+		1CA3CE8C1B3C66D400544525 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1C1C702F1B32F58B00835343 /* Sources */ = {
+		1C3A10931B382B9500082106 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C1C70451B32F5CD00835343 /* WeatherMapImageProvider.m in Sources */,
-				1C1C703A1B32F58B00835343 /* WeatherMapPlugIn.m in Sources */,
+				1C3A109E1B382B9500082106 /* ForecastIO_Data_ProviderPlugIn.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,7 +769,6 @@
 			files = (
 				1C4B3A891B270264005D9232 /* WeatherSectorPlugIn.m in Sources */,
 				1CD0EEBC1B2ADDD600FBF35E /* JKInterpolationMath.m in Sources */,
-				1C4A22A61B2F243F00261DB8 /* WeatherCodes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,18 +781,73 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1C84D6431B34368F003739C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C84D64E1B34368F003739C6 /* OpenWeather_Data_ProviderPlugIn.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C91738A1B38588200D1A2E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C9173951B38588200D1A2E1 /* Wunderground_Data_ProviderPlugIn.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CC87CC31B3C422A0044C1BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CC87CCA1B3C422A0044C1BA /* main.m in Sources */,
+				1CA3CE8F1B3C6A8C00544525 /* QuartzOfflineRenderer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1C3A10A31B382C0800082106 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1C3A10971B382B9500082106 /* ForecastIO Data Provider */;
+			targetProxy = 1C3A10A21B382C0800082106 /* PBXContainerItemProxy */;
+		};
+		1C64FF511B3F0D880079C37C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1C91738E1B38588200D1A2E1 /* Wunderground Data Provider */;
+			targetProxy = 1C64FF501B3F0D880079C37C /* PBXContainerItemProxy */;
+		};
+		1C64FF531B3F0D890079C37C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1C3A10971B382B9500082106 /* ForecastIO Data Provider */;
+			targetProxy = 1C64FF521B3F0D890079C37C /* PBXContainerItemProxy */;
+		};
+		1C64FF551B3F0D8A0079C37C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1C84D6471B34368F003739C6 /* OpenWeather Data Provider */;
+			targetProxy = 1C64FF541B3F0D8A0079C37C /* PBXContainerItemProxy */;
+		};
+		1C64FF571B3F0D8D0079C37C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1C4B3A811B270264005D9232 /* Weather Sector */;
+			targetProxy = 1C64FF561B3F0D8D0079C37C /* PBXContainerItemProxy */;
+		};
+		1C84D6531B34369D003739C6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1C84D6471B34368F003739C6 /* OpenWeather Data Provider */;
+			targetProxy = 1C84D6521B34369D003739C6 /* PBXContainerItemProxy */;
+		};
+		1C91739A1B38588C00D1A2E1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1C91738E1B38588200D1A2E1 /* Wunderground Data Provider */;
+			targetProxy = 1C9173991B38588C00D1A2E1 /* PBXContainerItemProxy */;
+		};
 		1CCA89F21B286A440009C69E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1C4B3A811B270264005D9232 /* Weather Sector */;
 			targetProxy = 1CCA89F11B286A440009C69E /* PBXContainerItemProxy */;
-		};
-		1CFD98781B32F76E000C91D5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1C1C70331B32F58B00835343 /* WeatherMap */;
-			targetProxy = 1CFD98771B32F76E000C91D5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -590,7 +863,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		1C1C703C1B32F58B00835343 /* Debug */ = {
+		1C3A109F1B382B9500082106 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -598,7 +871,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = WeatherMap/Info.plist;
+				INFOPLIST_FILE = "ForecastIO Data Provider/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -607,11 +880,11 @@
 			};
 			name = Debug;
 		};
-		1C1C703D1B32F58B00835343 /* Release */ = {
+		1C3A10A01B382B9500082106 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = WeatherMap/Info.plist;
+				INFOPLIST_FILE = "ForecastIO Data Provider/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -658,7 +931,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx10.10;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -693,7 +966,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = macosx10.10;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -753,19 +1026,104 @@
 			};
 			name = Release;
 		};
+		1C84D6501B34368F003739C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "OpenWeather Data Provider/Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Debug;
+		};
+		1C84D6511B34368F003739C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "OpenWeather Data Provider/Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Release;
+		};
+		1C9173961B38588200D1A2E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Wunderground Data Provider/Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Debug;
+		};
+		1C9173971B38588200D1A2E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Wunderground Data Provider/Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Release;
+		};
+		1CC87CCB1B3C422A0044C1BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INSTALL_PATH = /usr/bin;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		1CC87CCC1B3C422A0044C1BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INSTALL_PATH = /usr/bin;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1C1C703B1B32F58B00835343 /* Build configuration list for PBXNativeTarget "WeatherMap" */ = {
+		1C3A10A11B382B9500082106 /* Build configuration list for PBXNativeTarget "ForecastIO Data Provider" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1C1C703C1B32F58B00835343 /* Debug */,
-				1C1C703D1B32F58B00835343 /* Release */,
+				1C3A109F1B382B9500082106 /* Debug */,
+				1C3A10A01B382B9500082106 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		1C4B3A7C1B270264005D9232 /* Build configuration list for PBXProject "Weather Sector" */ = {
+		1C4B3A7C1B270264005D9232 /* Build configuration list for PBXProject "Weather" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1C4B3A8A1B270264005D9232 /* Debug */,
@@ -788,6 +1146,33 @@
 			buildConfigurations = (
 				1C4B3AB41B273613005D9232 /* Debug */,
 				1C4B3AB51B273613005D9232 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		1C84D64F1B34368F003739C6 /* Build configuration list for PBXNativeTarget "OpenWeather Data Provider" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C84D6501B34368F003739C6 /* Debug */,
+				1C84D6511B34368F003739C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		1C9173981B38588200D1A2E1 /* Build configuration list for PBXNativeTarget "Wunderground Data Provider" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C9173961B38588200D1A2E1 /* Debug */,
+				1C9173971B38588200D1A2E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		1CC87CCD1B3C422A0044C1BA /* Build configuration list for PBXNativeTarget "Weather-Automator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CC87CCB1B3C422A0044C1BA /* Debug */,
+				1CC87CCC1B3C422A0044C1BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

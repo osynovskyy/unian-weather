@@ -10,7 +10,6 @@
 #import <OpenGL/CGLMacro.h>
 
 #import "WeatherSectorPlugIn.h"
-#import "WeatherCodes.h"
 
 #import "JKInterpolationMath.h"
 
@@ -73,6 +72,36 @@
     return immutablePath;
 }
 @end
+//
+//@implementation NSString (WeatherTemperature)
+//
+//+ (NSString *) stringWithTemperature: (NSNumber *) temperature {
+//    
+//    double temp = [temperature doubleValue];
+//    
+//    
+//    
+//    return retString;
+//}
+//
+//@end
+
+@implementation NSNumberFormatter (PreventNegativeZero)
+
+- (NSString *)stringFromNumberWithoutNegativeZero:(NSNumber *)number
+{
+    NSString *const string = [self stringFromNumber: number];
+    NSString *const negZeroString = [self stringFromNumber: [NSNumber numberWithFloat: -0.0f]];
+    
+    if([string isEqualToString: negZeroString])
+    {
+        return [self stringFromNumber: [NSNumber numberWithFloat: 0.0]];
+    }
+    
+    return string;
+}
+
+@end
 
 
 @interface SectorImageProvider: NSObject <QCPlugInOutputImageProvider> {
@@ -127,15 +156,6 @@
 
 - (BOOL)renderToBuffer:(void *)baseAddress withBytesPerRow:(NSUInteger)rowBytes pixelFormat:(NSString *)format forBounds:(NSRect)bounds {
     
-//    if (_renderBuffer.data == NULL || self.needUpdate) { //Render buffer not created yet, creating
-//        _renderBuffer.data = malloc(bounds.size.height*rowBytes);
-//        _renderBuffer.width = bounds.size.width;
-//        _renderBuffer.height = bounds.size.height;
-//        _renderBuffer.rowBytes = rowBytes;
-//        
-//        self.needUpdate = YES;
-//    }
-    
     // Declaring destination buffer
     vImage_Buffer destBuffer;
     destBuffer.data = baseAddress;
@@ -181,17 +201,23 @@
         
         CGContextSetFillColorWithColor(context, [NSColor whiteColor].CGColor);
         
-        NSString *tempString = [NSString stringWithFormat:@"%@%.1f˚", self.temperature >= 0? @" " : @"",roundf(self.temperature*10.0)/10.0];
-        
         NSDictionary *attribs = @{NSFontAttributeName: [NSFont fontWithName:@"PF DinDisplay Pro Medium" size:22]};
         
+        NSNumberFormatter *formatTemperature = [[NSNumberFormatter alloc] init];
+        formatTemperature.numberStyle = NSNumberFormatterDecimalStyle;
+        formatTemperature.roundingMode = NSNumberFormatterRoundHalfUp;
+        formatTemperature.positiveFormat = @" 0.0";
+        formatTemperature.negativeFormat = @"-0.0";
+        
+        NSString *tempString = [NSString stringWithFormat:@"%@˚", [formatTemperature stringFromNumberWithoutNegativeZero:@(self.temperature)]];
+
         NSSize textSize = [tempString sizeWithAttributes:attribs];
         
         CGContextShowTextAtPoint(context, 50-textSize.width/2, 15, [tempString cStringUsingEncoding:NSMacOSRomanStringEncoding], [tempString length]);
         
         //Draw horizontal line
         
-        NSBezierPath *hLine = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(15, 35, 70, 1) xRadius:0.5 yRadius:0.5];
+        NSBezierPath *hLine = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(15, 34, 70, 2) xRadius:1 yRadius:1];
         
         CGContextAddPath(context, [hLine quartzPath]);
         
@@ -199,7 +225,7 @@
         
         //Draw Icon
         
-        NSString *pathToIcon = [[NSBundle bundleForClass:[self class]] pathForResource: [[WeatherCodes codes] objectForKey:self.icon] ofType:@"png"];
+        NSString *pathToIcon = [[NSBundle bundleForClass:[self class]] pathForResource: self.icon ofType:@"png"];
         
         CGDataProviderRef dataProvider = CGDataProviderCreateWithFilename([pathToIcon cStringUsingEncoding:NSMacOSRomanStringEncoding]);
         
@@ -260,7 +286,7 @@
         
         CGContextBeginPath(context);
         
-        CGFloat radStrength = degreesToRadians(self.windStrength);
+        CGFloat radStrength = degreesToRadians(JKQuadraticOutInterpolation(self.windStrength/70, 5, 90));
         CGFloat radDirection = -degreesToRadians(self.windDirection-90);
         
         CGContextAddArc(context, 50, 50, 47, radDirection+radStrength/2, radDirection-radStrength/2, 1);
@@ -312,6 +338,7 @@
 @dynamic inputWindStrength, inputWindDirection, inputWindColor;
 @dynamic inputBackgroundColor;
 
+@dynamic outputEnabled;
 @dynamic outputSector;
 
 + (NSDictionary *)attributes
@@ -401,8 +428,8 @@
                  QCPortAttributeNameKey: @"Wind Strength",
                  QCPortAttributeTypeKey: QCPortTypeNumber,
                  QCPortAttributeDefaultValueKey: [NSNumber numberWithFloat:10.0],
-                 QCPortAttributeMinimumValueKey: [NSNumber numberWithFloat:10],
-                 QCPortAttributeMaximumValueKey: [NSNumber numberWithFloat:360]
+                 QCPortAttributeMinimumValueKey: [NSNumber numberWithFloat:0],
+                 QCPortAttributeMaximumValueKey: [NSNumber numberWithFloat:70]
                  };
     }
     
@@ -420,16 +447,16 @@
                  };
     }
     
-    if ([key isEqualToString:@"outputSector"]) {
+    if ([key isEqualToString:@"outputEnabled"]) {
         return @{
-                 QCPortAttributeNameKey: @"Sector",
+                 QCPortAttributeNameKey: @"Enabled",
                  QCPortAttributeTypeKey: QCPortTypeImage
                  };
     }
     
-    if ([key isEqualToString:@"outputMask"]) {
+    if ([key isEqualToString:@"outputSector"]) {
         return @{
-                 QCPortAttributeNameKey: @"Mask",
+                 QCPortAttributeNameKey: @"Sector",
                  QCPortAttributeTypeKey: QCPortTypeImage
                  };
     }
@@ -482,21 +509,25 @@
     
     double animation = 1.0;
     
+    self.outputEnabled = YES;
+    
     if (self.inputAnimationEnable) {
-        if (time < self.inputInPoint || time > self.inputOutPoint + self.inputAnimationDuration)
-            animation = 0.0;
-        else if (time >= self.inputInPoint && time <= self.inputInPoint+self.inputAnimationDuration) {
+        
+        if (time >= self.inputInPoint && time <= self.inputInPoint+self.inputAnimationDuration) { //animation in
             
             CGFloat t = (time - self.inputInPoint)/self.inputAnimationDuration;
             
             animation = JKCubicInOutInterpolation(t, 0, 1);
             self.provider.needUpdate = YES;
-        } else if (time >= self.inputOutPoint && time <= self.inputOutPoint+self.inputAnimationDuration) {
+        } else if (time >= self.inputOutPoint && time <= self.inputOutPoint+self.inputAnimationDuration) { //animation out
             
             CGFloat t = (time - self.inputOutPoint)/self.inputAnimationDuration;
             
             animation = JKCubicInOutInterpolation(t, 1, 0);
             self.provider.needUpdate = YES;
+        } else if (time < self.inputInPoint || time > self.inputOutPoint + self.inputAnimationDuration) {
+            animation = 0.0;
+            self.outputEnabled = NO;
         }
     }
     

@@ -33,6 +33,7 @@
 @property (assign) CGColorRef inputWindColor;
 @property (assign) CGColorRef inputBackgroundColor;
 
+@property (assign) BOOL outputEnabled;
 @property (assign) id<QCPlugInOutputImageProvider> outputSector;
 
 @end
