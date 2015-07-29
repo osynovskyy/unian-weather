@@ -6,10 +6,34 @@
 	<string>com.osynovskyy.weather-automator</string>
 	<key>Program</key>
 	<string>Weather-Automator</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>Weather-Automator</string>
+		<string>--comp</string>
+		<string>weather.qtz</string>
+		<string>--audio</string>
+		<string>weather.aif</string>
+		<string>--in</string>
+		<string>0.0</string>
+		<string>--out</string>
+		<string>37.0</string>
+		<string>--data</string>
+		<string>sector_openweather.qtz</string>
+		<string>sector_forecastio.qtz</string>
+		<string>--time</string>
+		<string> 09:00</string>
+		<string> 12:00</string>
+		<string> 15:00</string>
+		<string> 18:00</string>
+		<string> 21:00</string>
+		<string> 23:00</string>
+		<string>--ingest</string>
+		<string>/Users/osynovskyy/</string>
+	</array>
 	<key>WorkingDirectory</key>
-	<string>/Users/oleksii-osynovskyi/Library/Developer/Xcode/DerivedData/Weather-atabmtkhpdrxeqdyjmqcthetuglf/Build/Products/Debug</string>
+	<string>/Users/osynovskyy/Weather-Automator</string>
 	<key>RunAtLoad</key>
-	<false/>
+	<true/>
 	<key>StartCalendarInterval</key>
 	<dict>
 		<key>Hour</key>

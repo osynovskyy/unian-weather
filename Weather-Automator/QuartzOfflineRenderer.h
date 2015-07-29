@@ -9,7 +9,6 @@
 @import Foundation;
 @import Quartz;
 @import AVFoundation;
-@import VideoToolbox;
 
 @interface QuartzOfflineRenderer : NSOperation
 
@@ -18,9 +17,11 @@
 @property CMTimeRange timeRange;
 
 @property (readonly) BOOL isFailed;
+@property (readonly) BOOL hasAudio;
 
 - (instancetype) initWithCompositionPath:(NSString *)path inputKeys:(NSDictionary *)keys pixelsWide:(int32_t)width pixelsHight:(int32_t)height;
 - (BOOL) setupOutputWithURL:(NSURL *)url inPoint:(NSTimeInterval) inPoint outPoint: (NSTimeInterval) outPoint;
+- (BOOL) addAudio:(NSURL *)urlSound;
 
 //- (void) main;
 

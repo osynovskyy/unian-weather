@@ -15,11 +15,6 @@
 #define RENDER_WIDTH    788
 #define RENDER_HEIGHT   576
 
-#define FROM 0
-#define TO 37
-
-#define INJEST @"/Users/oleksii-osynovskyi/"
-
 #include "QuartzOfflineRenderer.h"
 
 int isOK(NSDate *time) {
@@ -64,19 +59,144 @@ int isOK(NSDate *time) {
     return result;
 }
 
+void help() {
+    NSLog(@"Weather Automation Tool v1.0");
+    NSLog(@"Author: Oleksii Osynovskyi (hello@osynovskyy.com)");
+    NSLog(@"-------------------------------------------------");
+    NSLog(@"./Weather-Automator --comp <compname.qtz> --in <0.0> --out <10.0> --data <sector1.qtz> .. <sectorN.qtz> --time <9:00> <12:00> .. <23:00> --ingest <PATH/TO/INGEST/> [--audio <audiofile.aif>]");
+    
+    exit(-1);
+}
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
+        
+        NSArray *arguments = [[NSProcessInfo processInfo] arguments];
+        
+        NSLog(@"%@", arguments);
+        
+        NSString *compositionPath;
+        NSString *audioPath;
+        NSTimeInterval inPoint = 0, outPoint = 0;
+        NSString *ingestPath;
         
         NSDate *startTime;
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        NSMutableArray *outputTimes = [[NSMutableArray alloc] init];//@[@"09:00", @"12:00", @"15:00", @"18:00", @"21:00"];
+        NSMutableArray *dataProviders = [[NSMutableArray alloc] init];
+        int dataProviderIndex = 0;
+        
+        if ([arguments count] > 1) {
             
-        NSArray *outputTimes = @[@"09:00", @"12:00", @"15:00", @"18:00", @"21:00", @"23:00"];
+            //comp arguments
+            
+            NSUInteger i = [arguments indexOfObject:@"--comp"];
+            if (i == NSNotFound)
+                help();
+            
+            if (i+1 <= [arguments count])
+                compositionPath = arguments[i+1];
+            else
+                help();
+            
+            //comp arguments
+            
+            i = [arguments indexOfObject:@"--ingest"];
+            if (i == NSNotFound)
+                help();
+            
+            if (i+1 <= [arguments count])
+                ingestPath = arguments[i+1];
+            else
+                help();
+            
+            //inPoint argument
+            
+            i = [arguments indexOfObject:@"--in"];
+            
+            if (i == NSNotFound)
+                help();
+            
+            if (i+1 <= [arguments count])
+                inPoint = [arguments[i+1] doubleValue];
+            else
+                help();
+            
+            //ouPoint argument
+            
+            i = [arguments indexOfObject:@"--out"];
+            
+            if (i == NSNotFound)
+                help();
+            
+            if (i+1 <= [arguments count])
+                outPoint = [arguments[i+1] doubleValue];
+            else
+                help();
+            
+            //finding data providers
+            
+            i = [arguments indexOfObject:@"--data"];
+            
+            if (i == NSNotFound)
+                help();
+            
+            if (i+1 <= [arguments count]) {
+                NSUInteger j = [arguments count];
+                
+                for (NSUInteger x = i+1; x < j; x++) {
+                    NSRange check = [arguments[x] rangeOfString:@"--"];
+                    if (check.location == 0)
+                        break;
+                    else
+                        [dataProviders addObject:arguments[x]];
+                }
+            }
+            else
+                help();
+            
+            //finding time
+            
+            i = [arguments indexOfObject:@"--time"];
+            
+            if (i == NSNotFound)
+                help();
+            
+            if (i+1 <= [arguments count]) {
+                NSUInteger j = [arguments count];
+                
+                for (NSUInteger x = i+1; x < j; x++) {
+                    NSRange check = [arguments[x] rangeOfString:@"--"];
+                    if (check.location == 0)
+                        break;
+                    else
+                        [outputTimes addObject:arguments[x]];
+                }
+            }
+            else
+                help();
+
+            //audio if necessary
+            
+            i = [arguments indexOfObject:@"--audio"];
+            if (i != NSNotFound) {
+                if (i+1 <= [arguments count])
+                    audioPath = arguments[i+1];
+            }
+        } else
+            help();
         
         NSOperationQueue *mainQueue = [[NSOperationQueue alloc] init];
         
-        NSString *compostionPath = [@"openweather.qtz" stringByStandardizingPath];
+        NSString *compostionPath = [compositionPath stringByStandardizingPath];
         QuartzOfflineRenderer *renderer;
+        
+        NSURL *audioUrl;
+        
+        if (audioPath)
+             audioUrl = [NSURL fileURLWithPath: audioPath];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.dateFormat = @"yyyy-MM-dd";
@@ -87,6 +207,9 @@ int main(int argc, const char * argv[]) {
         NSDateFormatter *filenameDateFormatter = [[NSDateFormatter alloc] init];
         filenameDateFormatter.dateFormat = @"yyyyMMdd_hh:mm";
         
+        NSDateFormatter *yearDateFromatter = [[NSDateFormatter alloc] init];
+        yearDateFromatter.dateFormat = @"yyyy";
+        
         NSDate *nowDate = [[NSDate alloc] init];
         
         for (NSString *time in outputTimes) {
@@ -95,11 +218,15 @@ int main(int argc, const char * argv[]) {
             
             if ([nowDate compare:renderDate] != NSOrderedDescending) {
                 
+                int result;
+                
                 do {
                     
                     startTime = [[NSDate alloc] init];
                     
-                    NSDictionary *parameters = @{@"Date_And_Time": [fullDateFormatter stringFromDate: renderDate]};
+                    NSDictionary *parameters = @{@"Date_And_Time": [fullDateFormatter stringFromDate: renderDate],
+                                                 @"Sector_Composition": dataProviders[dataProviderIndex],
+                                                 @"Copyright": [NSString stringWithFormat:@"©%@ ТОВ \"УНІАН ТВ\"", [yearDateFromatter stringFromDate:nowDate] ]};
                     
                     renderer = [[QuartzOfflineRenderer alloc] initWithCompositionPath:compostionPath
                                                                             inputKeys:parameters
@@ -113,13 +240,16 @@ int main(int argc, const char * argv[]) {
                         
                         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), filename]];
                         
-                        if ([renderer setupOutputWithURL: url inPoint:FROM outPoint:TO]) {
+                        if ([renderer setupOutputWithURL: url inPoint:inPoint outPoint:outPoint] && (audioUrl!=nil ? [renderer addAudio:audioUrl] : YES) ) { //
                             
                             renderer.completionBlock = ^{
                                 
                                 NSError *error;
                                 
-                                NSURL *urlInjest = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", INJEST, filename]];
+                                NSURL *urlInjest = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", ingestPath, filename]];
+                                
+                                if ([fileManager fileExistsAtPath:[urlInjest path]])
+                                    [fileManager removeItemAtURL:urlInjest error:&error];
                                 
                                 if ([fileManager moveItemAtURL:url toURL:urlInjest error:&error]) {
                                     NSLog(@"OK: Successfully moved to injest %@", urlInjest);
@@ -138,9 +268,18 @@ int main(int argc, const char * argv[]) {
                         return -1;
                     }
                     
-                } while (isOK(startTime) == -1); //repeat until success
+                    result = isOK(startTime);
+                    
+                    if (result == -1) {
+                        dataProviderIndex ++;
+                        if (dataProviderIndex >= [dataProviders count])
+                            dataProviderIndex = 0;
+                    }
+                    
+                } while (result == -1); //repeat until success
             }
         }
     }
+    
     return 0;
 }

@@ -12,7 +12,9 @@
 @interface AppDelegate ()
 
 @property (weak) IBOutlet NSWindow *window;
-@property (weak) IBOutlet QCView *quartzView;
+@property (weak) IBOutlet NSView *viewMain;
+@property (nonatomic, strong) QCView *quartzView;
+
 
 @end
 
@@ -20,6 +22,12 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
+    self.quartzView = [[QCView alloc] initWithFrame:self.viewMain.bounds];
+    
+    [self.viewMain addSubview:self.quartzView];
+    
+    NSLog(@"view:%f, %f", self.quartzView.bounds.size.width, self.quartzView.bounds.size.height);
+    
     [self.quartzView loadCompositionFromFile:[[NSBundle mainBundle] pathForResource:@"composition" ofType:@"qtz"]];
     
     [self.quartzView startRendering];
