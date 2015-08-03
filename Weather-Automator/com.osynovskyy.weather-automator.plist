@@ -21,12 +21,9 @@
 		<string>sector_openweather.qtz</string>
 		<string>sector_forecastio.qtz</string>
 		<string>--time</string>
-		<string> 09:00</string>
-		<string> 12:00</string>
-		<string> 15:00</string>
-		<string> 18:00</string>
-		<string> 21:00</string>
-		<string> 23:00</string>
+		<string>12:00</string>
+		<string>18:00</string>
+		<string>t9:00</string>
 		<string>--ingest</string>
 		<string>/Users/osynovskyy/</string>
 	</array>

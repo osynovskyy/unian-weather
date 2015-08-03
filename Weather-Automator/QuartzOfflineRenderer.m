@@ -299,7 +299,7 @@
     
     [self.assetWriter startSessionAtSourceTime: self.timeRange.start];
     
-    dispatch_queue_t work_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);//dispatch_queue_create("com.osynovskyy.weather-automator", DISPATCH_QUEUE_SERIAL);
+    dispatch_queue_t work_queue = dispatch_queue_create("com.osynovskyy.weather-automator", DISPATCH_QUEUE_SERIAL); //dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         
     __block CMTime renderTime = self.timeRange.start;
     
@@ -389,6 +389,7 @@
                 
                 [self.videoInput markAsFinished];
                 [self setFinishedVieo:YES];
+                failed = NO;
                 
                 break;
             }
@@ -408,6 +409,8 @@
                     [self.assetWriterAudioInput markAsFinished];
                     [self setFinishedAudio:YES];
                     
+                    failed = NO;
+                    
                     break;
                 }
             }
@@ -420,9 +423,8 @@
     
     [self.assetWriter finishWritingWithCompletionHandler:^{
         NSLog(@"OK: Rendered %lld half frames.", renderTime.value);
-        failed = NO;
-        [self setFinishedVideo:YES Audio:YES];
     }];
+    
 }
 
 - (CVPixelBufferRef) pixelBufferForTime: (NSTimeInterval)time {

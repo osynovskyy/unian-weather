@@ -205,16 +205,29 @@ int main(int argc, const char * argv[]) {
         fullDateFormatter.dateFormat = @"yyyy-MM-dd hh:mm";
         
         NSDateFormatter *filenameDateFormatter = [[NSDateFormatter alloc] init];
-        filenameDateFormatter.dateFormat = @"yyyyMMdd_hh:mm";
+        filenameDateFormatter.dateFormat = @"ddMMyy";
         
         NSDateFormatter *yearDateFromatter = [[NSDateFormatter alloc] init];
         yearDateFromatter.dateFormat = @"yyyy";
         
         NSDate *nowDate = [[NSDate alloc] init];
         
+        NSDateComponents *offsetDateComponets = [[NSDateComponents alloc] init];
+        [offsetDateComponets setDay:1];
+        
+        NSCalendar *gregorian = [NSCalendar calendarWithIdentifier: NSCalendarIdentifierGregorian];
+        
+        NSDate *tomorrowDate = [gregorian dateByAddingComponents:offsetDateComponets toDate:nowDate options:0];
+        
         for (NSString *time in outputTimes) {
             
-            NSDate *renderDate = [fullDateFormatter dateFromString: [NSString stringWithFormat:@"%@ %@", [dateFormatter stringFromDate:nowDate], time] ];
+            NSDate *renderDate;
+            
+            if ([time hasPrefix:@"t"]) {
+                NSString *tomorrowTime = [time stringByReplacingOccurrencesOfString:@"t" withString:@""];
+                renderDate = [fullDateFormatter dateFromString: [NSString stringWithFormat:@"%@ %@", [dateFormatter stringFromDate:tomorrowDate], tomorrowTime] ];
+            } else
+                renderDate = [fullDateFormatter dateFromString: [NSString stringWithFormat:@"%@ %@", [dateFormatter stringFromDate:nowDate], time] ];
             
             if ([nowDate compare:renderDate] != NSOrderedDescending) {
                 
@@ -226,54 +239,56 @@ int main(int argc, const char * argv[]) {
                     
                     NSDictionary *parameters = @{@"Date_And_Time": [fullDateFormatter stringFromDate: renderDate],
                                                  @"Sector_Composition": dataProviders[dataProviderIndex],
-                                                 @"Copyright": [NSString stringWithFormat:@"©%@ ТОВ \"УНІАН ТВ\"", [yearDateFromatter stringFromDate:nowDate] ]};
+                                                 @"Copyright": [NSString stringWithFormat:@"©%@ ТОВ \"УНІАН ТВ\"", [yearDateFromatter stringFromDate:nowDate] ],
+                                                 @"Opening": [time hasPrefix:@"t"] ? @"tomorrow" : @"today" };
                     
                     renderer = [[QuartzOfflineRenderer alloc] initWithCompositionPath:compostionPath
                                                                             inputKeys:parameters
                                                                            pixelsWide:RENDER_WIDTH
                                                                           pixelsHight:RENDER_HEIGHT];
                     
+                    NSString *dateString = [NSString stringWithFormat:@"%@UPOGODA-%lu", [filenameDateFormatter stringFromDate:nowDate], (unsigned long)[outputTimes indexOfObject:time]+1];
+                    NSString *filename = [NSString stringWithFormat:@"%@.mov", dateString];
+                    
+                    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), filename]];
+                    
                     if (renderer) {
-                        
-                        NSString *dateString = [[filenameDateFormatter stringFromDate:renderDate] stringByReplacingOccurrencesOfString:@":" withString:@""];
-                        NSString *filename = [NSString stringWithFormat:@"weather_%@.mov", dateString];
-                        
-                        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), filename]];
                         
                         if ([renderer setupOutputWithURL: url inPoint:inPoint outPoint:outPoint] && (audioUrl!=nil ? [renderer addAudio:audioUrl] : YES) ) { //
                             
-                            renderer.completionBlock = ^{
-                                
-                                NSError *error;
-                                
-                                NSURL *urlInjest = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", ingestPath, filename]];
-                                
-                                if ([fileManager fileExistsAtPath:[urlInjest path]])
-                                    [fileManager removeItemAtURL:urlInjest error:&error];
-                                
-                                if ([fileManager moveItemAtURL:url toURL:urlInjest error:&error]) {
-                                    NSLog(@"OK: Successfully moved to injest %@", urlInjest);
-                                } else {
-                                    NSLog(@"ERROR: Failed move to injest %@ with error code: %ld", urlInjest, [error code]);
-                                }
-                                
-                            };
-                            
                             [mainQueue addOperations: @[renderer] waitUntilFinished:YES];
+                            
                         } else {
                             NSLog(@"ERROR: Failed to render: %@", url);
                         }
                     } else {
                         NSLog(@"ERROR: QuartzOfflineRenderer couldn't create");
-                        return -1;
+                        result = -1;
                     }
                     
                     result = isOK(startTime);
                     
-                    if (result == -1) {
+                    if (result == -1) { //looking for another data provider
+                        
                         dataProviderIndex ++;
                         if (dataProviderIndex >= [dataProviders count])
                             dataProviderIndex = 0;
+                        
+                    } else { //copy file to ingest
+                        
+                        NSError *error;
+                        
+                        NSURL *urlInjest = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", ingestPath, filename]];
+                        
+                        if ([fileManager fileExistsAtPath:[urlInjest path]])
+                            [fileManager removeItemAtURL:urlInjest error:&error];
+                        
+                        if ([fileManager moveItemAtURL:url toURL:urlInjest error:&error]) {
+                            NSLog(@"OK: Successfully moved to injest %@", urlInjest);
+                        } else {
+                            NSLog(@"ERROR: Failed move to injest %@ with error code: %ld", urlInjest, [error code]);
+                        }
+                        
                     }
                     
                 } while (result == -1); //repeat until success

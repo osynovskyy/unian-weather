@@ -55,6 +55,11 @@
 		1CC87CCA1B3C422A0044C1BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC87CC91B3C422A0044C1BA /* main.m */; };
 		1CD0EEBC1B2ADDD600FBF35E /* JKInterpolationMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD0EEBB1B2ADDD600FBF35E /* JKInterpolationMath.m */; };
 		1CE5DBBD1B28348D00F14EC7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C4B3AA41B273613005D9232 /* MainMenu.xib */; };
+		AFCED48D1B6A07CD0044165E /* weather.aif in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFCED4871B6A07810044165E /* weather.aif */; };
+		AFCED48E1B6A07CD0044165E /* weather.qtz in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFCED4881B6A07810044165E /* weather.qtz */; };
+		AFCED48F1B6A07CD0044165E /* sector_forecastio.qtz in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFCED4891B6A07810044165E /* sector_forecastio.qtz */; };
+		AFCED4901B6A07CD0044165E /* sector_openweather.qtz in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFCED48A1B6A07810044165E /* sector_openweather.qtz */; };
+		AFCED4911B6A07CD0044165E /* images in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFCED48B1B6A07810044165E /* images */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,12 +124,17 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		1CC87CC51B3C422A0044C1BA /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
-			dstSubfolderSpec = 0;
+			dstSubfolderSpec = 16;
 			files = (
+				AFCED48D1B6A07CD0044165E /* weather.aif in CopyFiles */,
+				AFCED48E1B6A07CD0044165E /* weather.qtz in CopyFiles */,
+				AFCED48F1B6A07CD0044165E /* sector_forecastio.qtz in CopyFiles */,
+				AFCED4901B6A07CD0044165E /* sector_openweather.qtz in CopyFiles */,
+				AFCED4911B6A07CD0044165E /* images in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -197,6 +207,11 @@
 		1CC8E1A01B43D1B700BF2707 /* com.osynovskyy.weather-automator.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "com.osynovskyy.weather-automator.plist"; sourceTree = "<group>"; };
 		1CD0EEBA1B2ADDD600FBF35E /* JKInterpolationMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKInterpolationMath.h; sourceTree = "<group>"; };
 		1CD0EEBB1B2ADDD600FBF35E /* JKInterpolationMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKInterpolationMath.m; sourceTree = "<group>"; };
+		AFCED4871B6A07810044165E /* weather.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = weather.aif; sourceTree = "<group>"; };
+		AFCED4881B6A07810044165E /* weather.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = weather.qtz; sourceTree = "<group>"; };
+		AFCED4891B6A07810044165E /* sector_forecastio.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = sector_forecastio.qtz; sourceTree = "<group>"; };
+		AFCED48A1B6A07810044165E /* sector_openweather.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = sector_openweather.qtz; sourceTree = "<group>"; };
+		AFCED48B1B6A07810044165E /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -390,6 +405,7 @@
 		1CC87CC81B3C422A0044C1BA /* Weather-Automator */ = {
 			isa = PBXGroup;
 			children = (
+				AFCED48C1B6A078C0044165E /* Resources */,
 				1CC87CC91B3C422A0044C1BA /* main.m */,
 				1CA3CE8D1B3C6A8C00544525 /* QuartzOfflineRenderer.h */,
 				1CA3CE8E1B3C6A8C00544525 /* QuartzOfflineRenderer.m */,
@@ -436,6 +452,18 @@
 				1C4A227E1B2F231500261DB8 /* heavy-thunderstorm.png */,
 				1C4A227F1B2F231500261DB8 /* thunderstorm.png */,
 				1C4A22801B2F231500261DB8 /* light-thunderstorm.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		AFCED48C1B6A078C0044165E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AFCED4871B6A07810044165E /* weather.aif */,
+				AFCED4881B6A07810044165E /* weather.qtz */,
+				AFCED4891B6A07810044165E /* sector_forecastio.qtz */,
+				AFCED48A1B6A07810044165E /* sector_openweather.qtz */,
+				AFCED48B1B6A07810044165E /* images */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -750,7 +778,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "rm -rf \"$HOME/$PRODUCT_NAME/$PRODUCT_NAME\"\ncp -rf \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME\" \"$HOME/$PRODUCT_NAME/\"\n\nrm -rf \"$HOME/$PRODUCT_NAME/com.osynovskyy.weather-automator.plist\"\ncp -rf \"$PROJECT_DIR/$PRODUCT_NAME/com.osynovskyy.weather-automator.plist\" \"$HOME/$PRODUCT_NAME/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
