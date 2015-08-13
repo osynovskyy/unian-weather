@@ -21,20 +21,21 @@
 		<string>sector_openweather.qtz</string>
 		<string>sector_forecastio.qtz</string>
 		<string>--time</string>
-		<string>12:00</string>
+		<string>10:00</string>
+		<string>14:00</string>
 		<string>18:00</string>
-		<string>t9:00</string>
+		<string>t12:00</string>
 		<string>--ingest</string>
-		<string>/Users/osynovskyy/</string>
+		<string>/Volumes/WeatherUnian/</string>
 	</array>
 	<key>WorkingDirectory</key>
-	<string>/Users/osynovskyy/Weather-Automator</string>
+	<string>/Users/oleksii-osynovskyi/Weather-Automator</string>
 	<key>RunAtLoad</key>
 	<true/>
 	<key>StartCalendarInterval</key>
 	<dict>
 		<key>Hour</key>
-		<integer>8</integer>
+		<integer>6</integer>
 		<key>Minute</key>
 		<integer>0</integer>
 	</dict>

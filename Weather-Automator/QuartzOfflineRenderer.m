@@ -156,7 +156,7 @@
     //Using Apple Prores 422 Codec for output PAL
     
     NSDictionary *videoSettings = @{
-                                    AVVideoCodecKey: AVVideoCodecAppleProRes422, //@"dvpp",
+                                    AVVideoCodecKey: @"dvpp", //AVVideoCodecAppleProRes422, 
                                     AVVideoScalingModeKey: AVVideoScalingModeResize,
                                     AVVideoWidthKey: @(720),
                                     AVVideoHeightKey: @(576),
