@@ -9,9 +9,12 @@
 #import "QuartzOfflineRenderer.h"
 
 @interface QuartzOfflineRenderer () {
-    BOOL finished;
+    BOOL finishedAudio;
+    BOOL finishedVideo;
     BOOL ready;
     BOOL failed;
+    
+    BOOL hasAudio;
 }
 
 @property (nonatomic, strong) QCRenderer *renderer;
@@ -20,6 +23,11 @@
 @property (nonatomic, strong) AVAssetWriterInput *videoInput;
 @property (nonatomic, strong) AVAssetWriterInputPixelBufferAdaptor *pixelBufferAdaptor;
 
+@property (nonatomic, strong) AVAsset   *assetAudio;
+@property (nonatomic, strong) AVAssetReader *assetAudioReader;
+@property (nonatomic, strong) AVAssetReaderOutput *assetReaderAudioOutput;
+@property (nonatomic, strong) AVAssetWriterInput *assetWriterAudioInput;
+        
 @end
 
 @implementation QuartzOfflineRenderer
@@ -27,7 +35,7 @@
 #pragma mark — NSOperation
 
 - (BOOL) isFinished {
-    return finished;
+    return hasAudio ? finishedAudio && finishedVideo : finishedVideo;
 }
 
 - (BOOL) isReady {
@@ -36,6 +44,23 @@
 
 - (BOOL) isFailed {
     return failed;
+}
+
+- (BOOL) hasAudio {
+    return hasAudio;
+}
+
+- (void) setFinishedVideo: (BOOL)bVideo Audio: (BOOL)bAudio {
+    finishedVideo = bVideo;
+    finishedAudio = bAudio;
+}
+
+- (void) setFinishedVieo: (BOOL)bVideo {
+    finishedVideo = bVideo;
+}
+
+- (void) setFinishedAudio: (BOOL)bAudio {
+    finishedAudio = bAudio;
 }
 
 #pragma mark — inits
@@ -75,7 +100,7 @@
                 NSLog(@"ERROR: Couldn't set inputKeys");
                 return nil;
             }
-            NSLog(@"OK: Initialized for date %@", [self.renderer valueForInputKey: key ] );
+            NSLog(@"OK: %@ = %@", key, [self.renderer valueForInputKey: key ] );
         }
         
         CGColorSpaceRelease(colorSpace);
@@ -83,7 +108,7 @@
         if (self.renderer == nil)
             return nil;
         
-        finished = NO;
+        [self setFinishedVieo:NO];
         ready = NO;
     }
     
@@ -131,7 +156,7 @@
     //Using Apple Prores 422 Codec for output PAL
     
     NSDictionary *videoSettings = @{
-                                    AVVideoCodecKey: AVVideoCodecAppleProRes422, //@"dvpp",
+                                    AVVideoCodecKey: @"dvpp", //AVVideoCodecAppleProRes422, 
                                     AVVideoScalingModeKey: AVVideoScalingModeResize,
                                     AVVideoWidthKey: @(720),
                                     AVVideoHeightKey: @(576),
@@ -171,14 +196,75 @@
         return NO;
     }
     
-    //Test render
-//    
-//    if ([self pixelBufferForTime: ] == nil) {
-//        NSLog(@"ERROR: -pixelBufferForTime: returns nil");
-//        return NO;
-//    }
-    
     ready = YES;
+    
+    return YES;
+}
+
+- (BOOL) addAudio:(NSURL *)urlSound {
+    
+    NSError *error;
+    
+    hasAudio = NO;
+    
+    self.assetAudio = [AVAsset assetWithURL:urlSound];
+    self.assetAudioReader = [AVAssetReader assetReaderWithAsset:self.assetAudio error:&error];
+    
+    if (self.assetAudioReader == nil) {
+        NSLog(@"ERROR: -assetReaderWithAsset: returns nil with code: %@", error);
+        return NO;
+    }
+        
+    AVAssetTrack *assetAudioTrack = nil;
+        
+    NSArray *audioTracks = [self.assetAudio tracksWithMediaType:AVMediaTypeAudio];
+    if ([audioTracks count] > 0)
+        assetAudioTrack = [audioTracks firstObject];
+        
+    if (assetAudioTrack == nil) {
+        NSLog(@"ERROR: -tracksWithMediaType: doesn't return any audio track");
+        return NO;
+    }
+    
+    
+    NSDictionary *decompressionAudioSettings = @{AVFormatIDKey: [NSNumber numberWithUnsignedInt:kAudioFormatLinearPCM]};
+    self.assetReaderAudioOutput = [AVAssetReaderTrackOutput assetReaderTrackOutputWithTrack:assetAudioTrack outputSettings:decompressionAudioSettings];
+    
+    if (self.assetReaderAudioOutput == nil) {
+        NSLog(@"ERROR: -assetReaderTrackOutputWithTrack: returns nil.");
+        return NO;
+    }
+    
+    if ([self.assetAudioReader canAddOutput:self.assetReaderAudioOutput]) {
+        [self.assetAudioReader addOutput:self.assetReaderAudioOutput];
+    } else {
+        NSLog(@"ERROR: -canAddOutput: returns NO.");
+        return NO;
+    }
+    
+    NSDictionary *compressionAudioSettings = @{AVFormatIDKey: @(kAudioFormatLinearPCM),
+                                               AVSampleRateKey: @(48000.0),
+                                               AVNumberOfChannelsKey: @(1),
+                                               AVLinearPCMBitDepthKey: @(16),
+                                               AVLinearPCMIsBigEndianKey: @(NO),
+                                               AVLinearPCMIsFloatKey: @(NO),
+                                               AVLinearPCMIsNonInterleaved: @(NO)
+                                               };
+    self.assetWriterAudioInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeAudio outputSettings:compressionAudioSettings];
+    
+    if (self.assetWriterAudioInput == nil) {
+        NSLog(@"ERROR: -assetWriterInputWithMediaType: returns nil.");
+        return NO;
+    }
+    
+    [self.assetWriter addInput:self.assetWriterAudioInput];
+    
+    //Setting duration to duration of audio file
+    self.timeRange = CMTimeRangeMake(CMTimeConvertScale(assetAudioTrack.timeRange.start, 50, kCMTimeRoundingMethod_RoundTowardZero),
+                                     CMTimeConvertScale(assetAudioTrack.timeRange.duration, 50, kCMTimeRoundingMethod_RoundTowardZero));
+    
+    hasAudio = YES;
+    [self setFinishedAudio:NO];
     
     return YES;
 }
@@ -191,14 +277,29 @@
         return;
     }
     
-    finished = NO;
+    finishedAudio = NO;
+    finishedVideo = NO;
     failed = NO;
     
-    [self.assetWriter startWriting];
+    if (hasAudio) {
+        if ([self.assetAudioReader startReading] == NO) {
+            NSLog(@"ERROR: -startReading: returns NO.");
+            failed = YES;
+            [self setFinishedVideo:YES Audio:YES];
+            return;
+        }
+    }
+    
+    if ([self.assetWriter startWriting] == NO) {
+        NSLog(@"ERROR: -startWriting: returns NO.");
+        failed = YES;
+        [self setFinishedVideo:YES Audio:YES];
+        return;
+    }
     
     [self.assetWriter startSessionAtSourceTime: self.timeRange.start];
     
-    dispatch_queue_t work_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);//dispatch_queue_create("com.osynovskyy.weather-automator", DISPATCH_QUEUE_SERIAL);
+    dispatch_queue_t work_queue = dispatch_queue_create("com.osynovskyy.weather-automator", DISPATCH_QUEUE_SERIAL); //dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         
     __block CMTime renderTime = self.timeRange.start;
     
@@ -287,22 +388,43 @@
             if (!CMTimeRangeContainsTime(self.timeRange, renderTime)) {
                 
                 [self.videoInput markAsFinished];
-                [self.assetWriter finishWritingWithCompletionHandler:^{
-                    NSLog(@"OK: Rendered %lld half frames.", renderTime.value);
-                    failed = NO;
-                    finished = YES;
-                }];
+                [self setFinishedVieo:YES];
+                failed = NO;
                 
                 break;
             }
         }
     }];
     
+    if (hasAudio) {
+        [self.assetWriterAudioInput requestMediaDataWhenReadyOnQueue:work_queue usingBlock:^{
+            while ([self.assetWriterAudioInput isReadyForMoreMediaData]) {
+                
+                CMSampleBufferRef nextSampleBuffer = [self.assetReaderAudioOutput copyNextSampleBuffer];
+                
+                if (nextSampleBuffer != NULL) {
+                    [self.assetWriterAudioInput appendSampleBuffer:nextSampleBuffer];
+                    CFRelease(nextSampleBuffer);
+                } else {
+                    [self.assetWriterAudioInput markAsFinished];
+                    [self setFinishedAudio:YES];
+                    
+                    failed = NO;
+                    
+                    break;
+                }
+            }
+        }];
+    }
+    
     //loop for waiting until everything will done
     while (!([self isFinished] || [self isFailed])) {
     }
     
-    finished = YES;
+    [self.assetWriter finishWritingWithCompletionHandler:^{
+        NSLog(@"OK: Rendered %lld half frames.", renderTime.value);
+    }];
+    
 }
 
 - (CVPixelBufferRef) pixelBufferForTime: (NSTimeInterval)time {

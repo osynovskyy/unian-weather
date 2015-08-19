@@ -55,6 +55,12 @@
 		1CC87CCA1B3C422A0044C1BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC87CC91B3C422A0044C1BA /* main.m */; };
 		1CD0EEBC1B2ADDD600FBF35E /* JKInterpolationMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD0EEBB1B2ADDD600FBF35E /* JKInterpolationMath.m */; };
 		1CE5DBBD1B28348D00F14EC7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C4B3AA41B273613005D9232 /* MainMenu.xib */; };
+		3724983C50D8ED08126DC788 /* libPods-Weather-Automator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 982F5E0082FE559C11B6A276 /* libPods-Weather-Automator.a */; };
+		AFCED48D1B6A07CD0044165E /* weather.aif in Copy Resources */ = {isa = PBXBuildFile; fileRef = AFCED4871B6A07810044165E /* weather.aif */; };
+		AFCED48E1B6A07CD0044165E /* weather.qtz in Copy Resources */ = {isa = PBXBuildFile; fileRef = AFCED4881B6A07810044165E /* weather.qtz */; };
+		AFCED48F1B6A07CD0044165E /* sector_forecastio.qtz in Copy Resources */ = {isa = PBXBuildFile; fileRef = AFCED4891B6A07810044165E /* sector_forecastio.qtz */; };
+		AFCED4901B6A07CD0044165E /* sector_openweather.qtz in Copy Resources */ = {isa = PBXBuildFile; fileRef = AFCED48A1B6A07810044165E /* sector_openweather.qtz */; };
+		AFCED4911B6A07CD0044165E /* images in Copy Resources */ = {isa = PBXBuildFile; fileRef = AFCED48B1B6A07810044165E /* images */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,14 +123,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		1CC87CC51B3C422A0044C1BA /* CopyFiles */ = {
+		1C74C9FD1B7CCC7F00A4128D /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 0;
+			dstSubfolderSpec = 10;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CC87CC51B3C422A0044C1BA /* Copy Resources */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				AFCED48D1B6A07CD0044165E /* weather.aif in Copy Resources */,
+				AFCED48E1B6A07CD0044165E /* weather.qtz in Copy Resources */,
+				AFCED48F1B6A07CD0044165E /* sector_forecastio.qtz in Copy Resources */,
+				AFCED4901B6A07CD0044165E /* sector_openweather.qtz in Copy Resources */,
+				AFCED4911B6A07CD0044165E /* images in Copy Resources */,
+			);
+			name = "Copy Resources";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -197,6 +219,14 @@
 		1CC8E1A01B43D1B700BF2707 /* com.osynovskyy.weather-automator.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "com.osynovskyy.weather-automator.plist"; sourceTree = "<group>"; };
 		1CD0EEBA1B2ADDD600FBF35E /* JKInterpolationMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKInterpolationMath.h; sourceTree = "<group>"; };
 		1CD0EEBB1B2ADDD600FBF35E /* JKInterpolationMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKInterpolationMath.m; sourceTree = "<group>"; };
+		982F5E0082FE559C11B6A276 /* libPods-Weather-Automator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weather-Automator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFCED4871B6A07810044165E /* weather.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = weather.aif; sourceTree = "<group>"; };
+		AFCED4881B6A07810044165E /* weather.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = weather.qtz; sourceTree = "<group>"; };
+		AFCED4891B6A07810044165E /* sector_forecastio.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = sector_forecastio.qtz; sourceTree = "<group>"; };
+		AFCED48A1B6A07810044165E /* sector_openweather.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = sector_openweather.qtz; sourceTree = "<group>"; };
+		AFCED48B1B6A07810044165E /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		C467D3F5E510229B0D532151 /* Pods-Weather-Automator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather-Automator.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weather-Automator/Pods-Weather-Automator.release.xcconfig"; sourceTree = "<group>"; };
+		CDEA1D8A50E6CE8917FBE323 /* Pods-Weather-Automator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather-Automator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weather-Automator/Pods-Weather-Automator.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +270,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3724983C50D8ED08126DC788 /* libPods-Weather-Automator.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +303,8 @@
 				1C6EDD271B3C146A00ED1BD4 /* Data Providers */,
 				1CC87CC81B3C422A0044C1BA /* Weather-Automator */,
 				1C4B3A831B270264005D9232 /* Products */,
+				4520B4981EEA6B6A1A94022C /* Pods */,
+				A5162549DDE54D6EA4584CDF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -390,6 +423,7 @@
 		1CC87CC81B3C422A0044C1BA /* Weather-Automator */ = {
 			isa = PBXGroup;
 			children = (
+				AFCED48C1B6A078C0044165E /* Resources */,
 				1CC87CC91B3C422A0044C1BA /* main.m */,
 				1CA3CE8D1B3C6A8C00544525 /* QuartzOfflineRenderer.h */,
 				1CA3CE8E1B3C6A8C00544525 /* QuartzOfflineRenderer.m */,
@@ -436,6 +470,35 @@
 				1C4A227E1B2F231500261DB8 /* heavy-thunderstorm.png */,
 				1C4A227F1B2F231500261DB8 /* thunderstorm.png */,
 				1C4A22801B2F231500261DB8 /* light-thunderstorm.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		4520B4981EEA6B6A1A94022C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CDEA1D8A50E6CE8917FBE323 /* Pods-Weather-Automator.debug.xcconfig */,
+				C467D3F5E510229B0D532151 /* Pods-Weather-Automator.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A5162549DDE54D6EA4584CDF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				982F5E0082FE559C11B6A276 /* libPods-Weather-Automator.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AFCED48C1B6A078C0044165E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AFCED4871B6A07810044165E /* weather.aif */,
+				AFCED4881B6A07810044165E /* weather.qtz */,
+				AFCED4891B6A07810044165E /* sector_forecastio.qtz */,
+				AFCED48A1B6A07810044165E /* sector_openweather.qtz */,
+				AFCED48B1B6A07810044165E /* images */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -540,10 +603,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1CC87CCD1B3C422A0044C1BA /* Build configuration list for PBXNativeTarget "Weather-Automator" */;
 			buildPhases = (
+				5B70E7D4C5B30FF9E22CDC9E /* Check Pods Manifest.lock */,
 				1CC87CC31B3C422A0044C1BA /* Sources */,
 				1CC87CC41B3C422A0044C1BA /* Frameworks */,
-				1CC87CC51B3C422A0044C1BA /* CopyFiles */,
-				1CA3CE8C1B3C66D400544525 /* ShellScript */,
+				1C74C9FD1B7CCC7F00A4128D /* Copy Frameworks */,
+				1CC87CC51B3C422A0044C1BA /* Copy Resources */,
+				1CA3CE8C1B3C66D400544525 /* Copy To Working Folder */,
+				273612A1E7FE2FC708164B74 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -739,18 +805,49 @@
 			shellPath = /bin/sh;
 			shellScript = "# This shell script simply copies the built plug-in to \"~/Library/Graphics/Quartz Composer Plug-Ins\" and overrides any previous version at that location\n\nmkdir -p \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins\"\nrm -rf \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/Wunderground Data Provider.plugin\"\ncp -rf \"$BUILT_PRODUCTS_DIR/Wunderground Data Provider.plugin\" \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/\"\n";
 		};
-		1CA3CE8C1B3C66D400544525 /* ShellScript */ = {
+		1CA3CE8C1B3C66D400544525 /* Copy To Working Folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Copy To Working Folder";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "#rm -rf \"$HOME/$PRODUCT_NAME/$PRODUCT_NAME\"\n#cp -rf \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME\" \"$HOME/$PRODUCT_NAME/\"\n\n#rm -rf \"$HOME/$PRODUCT_NAME/com.osynovskyy.weather-automator.plist\"\n#cp -rf \"$PROJECT_DIR/$PRODUCT_NAME/com.osynovskyy.weather-automator.plist\" \"$HOME/$PRODUCT_NAME/\"\n";
+		};
+		273612A1E7FE2FC708164B74 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Weather-Automator/Pods-Weather-Automator-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B70E7D4C5B30FF9E22CDC9E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1088,11 +1185,17 @@
 		};
 		1CC87CCB1B3C422A0044C1BA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CDEA1D8A50E6CE8917FBE323 /* Pods-Weather-Automator.debug.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Weather-Automator",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INSTALL_PATH = /usr/bin;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1102,7 +1205,13 @@
 		};
 		1CC87CCC1B3C422A0044C1BA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C467D3F5E510229B0D532151 /* Pods-Weather-Automator.release.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Weather-Automator",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INSTALL_PATH = /usr/bin;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = NO;

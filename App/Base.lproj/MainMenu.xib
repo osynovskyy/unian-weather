@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
-        <plugIn identifier="com.apple.QuartzComposerIBPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -15,7 +14,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
-                <outlet property="quartzView" destination="MXu-HT-cta" id="EPs-Dc-Fzr"/>
+                <outlet property="viewMain" destination="EiT-Mj-1SZ" id="gZ6-xu-vgu"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -23,22 +22,10 @@
         <window title="App" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="335" y="390" width="788" height="576"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1200"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="788" height="576"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <qcView translatesAutoresizingMaskIntoConstraints="NO" id="MXu-HT-cta">
-                        <rect key="frame" x="0.0" y="0.0" width="788" height="576"/>
-                        <color key="eraseColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    </qcView>
-                </subviews>
-                <constraints>
-                    <constraint firstItem="MXu-HT-cta" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="4LC-VM-ozY"/>
-                    <constraint firstAttribute="bottom" secondItem="MXu-HT-cta" secondAttribute="bottom" id="NtZ-rE-Tu8"/>
-                    <constraint firstItem="MXu-HT-cta" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="PvS-7X-hAq"/>
-                    <constraint firstAttribute="trailing" secondItem="MXu-HT-cta" secondAttribute="trailing" id="Y85-bB-1xf"/>
-                </constraints>
             </view>
         </window>
         <menuItem title="Application" id="DR3-Gk-Xzj">
