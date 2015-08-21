@@ -7,11 +7,12 @@
 //
 
 @import Foundation;
+@import CoreFoundation;
 @import Quartz;
 @import AVFoundation;
+@import NetFS;
 
 #include <asl.h>
-#import <MailCore/MailCore.h>
 
 #define RENDER_WIDTH    788
 #define RENDER_HEIGHT   576
@@ -61,35 +62,35 @@ int isOK(NSDate *time) {
 }
 
 int Report() {
-    
-    MCOSMTPSession *smtpSession = [[MCOSMTPSession alloc] init];
-    smtpSession.hostname = @"smtp.gmail.com";
-    smtpSession.port = 465;
-    smtpSession.username = @"osynovskyy@gmail.com";
-    smtpSession.password = @"Xmysnk3kJ4HgBp";
-    smtpSession.authType = MCOAuthTypeSASLPlain;
-    smtpSession.connectionType = MCOConnectionTypeTLS;
-    
-    MCOMessageBuilder *builder = [[MCOMessageBuilder alloc] init];
-    MCOAddress *from = [MCOAddress addressWithDisplayName:@"Weather-Automator"
-                                                  mailbox:@"osynovskyy@gmail.com"];
-    MCOAddress *to = [MCOAddress addressWithDisplayName:nil
-                                                mailbox:@"o.osynovskyi@1plus1.ua"];
-    [[builder header] setFrom:from];
-    [[builder header] setTo:@[to]];
-    [[builder header] setSubject:@"My message"];
-    [builder setHTMLBody:@"This is a test message!"];
-    NSData * rfc822Data = [builder data];
-    
-    MCOSMTPSendOperation *sendOperation =
-    [smtpSession sendOperationWithData:rfc822Data];
-    [sendOperation start:^(NSError *error) {
-        if(error) {
-            NSLog(@"Error sending email: %@", error);
-        } else {
-            NSLog(@"Successfully sent email!");
-        }
-    }];
+//    
+//    MCOSMTPSession *smtpSession = [[MCOSMTPSession alloc] init];
+//    smtpSession.hostname = @"smtp.gmail.com";
+//    smtpSession.port = 465;
+//    smtpSession.username = @"osynovskyy@gmail.com";
+//    smtpSession.password = @"Xmysnk3kJ4HgBp";
+//    smtpSession.authType = MCOAuthTypeSASLPlain;
+//    smtpSession.connectionType = MCOConnectionTypeTLS;
+//    
+//    MCOMessageBuilder *builder = [[MCOMessageBuilder alloc] init];
+//    MCOAddress *from = [MCOAddress addressWithDisplayName:@"Weather-Automator"
+//                                                  mailbox:@"osynovskyy@gmail.com"];
+//    MCOAddress *to = [MCOAddress addressWithDisplayName:nil
+//                                                mailbox:@"o.osynovskyi@1plus1.ua"];
+//    [[builder header] setFrom:from];
+//    [[builder header] setTo:@[to]];
+//    [[builder header] setSubject:@"My message"];
+//    [builder setHTMLBody:@"This is a test message!"];
+//    NSData * rfc822Data = [builder data];
+//    
+//    MCOSMTPSendOperation *sendOperation =
+//    [smtpSession sendOperationWithData:rfc822Data];
+//    [sendOperation start:^(NSError *error) {
+//        if(error) {
+//            NSLog(@"Error sending email: %@", error);
+//        } else {
+//            NSLog(@"Successfully sent email!");
+//        }
+//    }];
     
     return 1;
 }
@@ -103,15 +104,36 @@ void help() {
     exit(-1);
 }
 
+int mountIngest(NSString *server, NSString *username, NSString *password, NSString *mountPath) {
+    
+    NSURL *volumeURL = [NSURL URLWithString:server];
+    NSURL *mountURL = [NSURL URLWithString:mountPath];
+    
+    CFArrayRef mountPoints;
+    
+    CFMutableDictionaryRef openOptions = CFDictionaryCreateMutable(kCFAllocatorDefault,
+                                                                   0,
+                                                                   &kCFTypeDictionaryKeyCallBacks,
+                                                                   &kCFTypeDictionaryValueCallBacks);
+    if (openOptions) {
+        CFDictionarySetValue(openOptions, kNAUIOptionKey, kNAUIOptionNoUI);
+    }
+    
+    int rc = NetFSMountURLSync((__bridge CFURLRef)volumeURL,
+                               (__bridge CFURLRef)mountURL,
+                               (__bridge CFStringRef)username,
+                               (__bridge CFStringRef)password,
+                               openOptions,
+                               NULL,
+                               &mountPoints);
+    
+    return rc;
+}
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
         Report();
-        
-        DELAY(100);
-
-        
-        return 1;
         
         NSArray *arguments = [[NSProcessInfo processInfo] arguments];
         
@@ -121,6 +143,9 @@ int main(int argc, const char * argv[]) {
         NSString *audioPath;
         NSTimeInterval inPoint = 0, outPoint = 0;
         NSString *ingestPath;
+        NSString *ingestShare;
+        NSString *ingestUsername;
+        NSString *ingestPassword;
         
         NSDate *startTime;
         
@@ -148,10 +173,12 @@ int main(int argc, const char * argv[]) {
             i = [arguments indexOfObject:@"--ingest"];
             if (i == NSNotFound)
                 help();
-            
-            if (i+1 <= [arguments count])
+            if (i+4 <= [arguments count]) {
                 ingestPath = arguments[i+1];
-            else
+                ingestShare = arguments[i+2];
+                ingestUsername = arguments[i+3];
+                ingestPassword = arguments[i+4];
+            } else
                 help();
             
             //inPoint argument
@@ -320,17 +347,28 @@ int main(int argc, const char * argv[]) {
                         
                         NSError *error;
                         
-                        NSURL *urlInjest = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", ingestPath, filename]];
-                        
-                        if ([fileManager fileExistsAtPath:[urlInjest path]])
-                            [fileManager removeItemAtURL:urlInjest error:&error];
-                        
-                        if ([fileManager moveItemAtURL:url toURL:urlInjest error:&error]) {
-                            NSLog(@"OK: Successfully moved to injest %@", urlInjest);
-                        } else {
-                            NSLog(@"ERROR: Failed move to injest %@ with error code: %ld", urlInjest, [error code]);
+                        if (![fileManager fileExistsAtPath:ingestPath]) {
+                            if (mountIngest(ingestShare, ingestUsername, ingestPassword, @"/Volumes") != 0) {
+                                NSLog(@"ERROR: Couldn't connect to ingest %@", ingestShare);
+                                result = -1;
+                            } else {
+                                NSLog(@"OK: Successfully connected to ingest %@", ingestShare);
+                            }
                         }
                         
+                        if (result != -1) {
+                            NSURL *urlInjest = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", ingestPath, filename]];
+                            
+                            if ([fileManager fileExistsAtPath:[urlInjest path]])
+                                [fileManager removeItemAtURL:urlInjest error:&error];
+                            
+                            if ([fileManager moveItemAtURL:url toURL:urlInjest error:&error]) {
+                                NSLog(@"OK: Successfully moved to injest %@", urlInjest);
+                            } else {
+                                NSLog(@"ERROR: Failed move to injest %@ with error code: %ld", urlInjest, [error code]);
+                                result = -1;
+                            }
+                        }
                     }
                     
                 } while (result == -1); //repeat until success
