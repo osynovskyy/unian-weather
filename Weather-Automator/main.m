@@ -61,40 +61,6 @@ int isOK(NSDate *time) {
     return result;
 }
 
-int Report() {
-//    
-//    MCOSMTPSession *smtpSession = [[MCOSMTPSession alloc] init];
-//    smtpSession.hostname = @"smtp.gmail.com";
-//    smtpSession.port = 465;
-//    smtpSession.username = @"osynovskyy@gmail.com";
-//    smtpSession.password = @"Xmysnk3kJ4HgBp";
-//    smtpSession.authType = MCOAuthTypeSASLPlain;
-//    smtpSession.connectionType = MCOConnectionTypeTLS;
-//    
-//    MCOMessageBuilder *builder = [[MCOMessageBuilder alloc] init];
-//    MCOAddress *from = [MCOAddress addressWithDisplayName:@"Weather-Automator"
-//                                                  mailbox:@"osynovskyy@gmail.com"];
-//    MCOAddress *to = [MCOAddress addressWithDisplayName:nil
-//                                                mailbox:@"o.osynovskyi@1plus1.ua"];
-//    [[builder header] setFrom:from];
-//    [[builder header] setTo:@[to]];
-//    [[builder header] setSubject:@"My message"];
-//    [builder setHTMLBody:@"This is a test message!"];
-//    NSData * rfc822Data = [builder data];
-//    
-//    MCOSMTPSendOperation *sendOperation =
-//    [smtpSession sendOperationWithData:rfc822Data];
-//    [sendOperation start:^(NSError *error) {
-//        if(error) {
-//            NSLog(@"Error sending email: %@", error);
-//        } else {
-//            NSLog(@"Successfully sent email!");
-//        }
-//    }];
-    
-    return 1;
-}
-
 void help() {
     NSLog(@"Weather Automation Tool v1.0");
     NSLog(@"Author: Oleksii Osynovskyi (hello@osynovskyy.com)");
@@ -132,8 +98,6 @@ int mountIngest(NSString *server, NSString *username, NSString *password, NSStri
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        
-        Report();
         
         NSArray *arguments = [[NSProcessInfo processInfo] arguments];
         

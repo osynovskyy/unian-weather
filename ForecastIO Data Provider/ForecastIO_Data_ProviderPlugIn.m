@@ -160,7 +160,7 @@
     }
     
     if ([json objectForKey:@"error"]) {
-        NSLog(@"ForecastIO: %@", json[@"error"]);
+        NSLog(@"ERROR: ForecastIO error: %@ for Lat: %f, Lon: %f", json[@"error"], self.inputLatitude, self.inputLongitude);
         return YES;
     }
    

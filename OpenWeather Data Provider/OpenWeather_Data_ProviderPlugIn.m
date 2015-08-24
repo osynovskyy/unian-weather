@@ -192,12 +192,12 @@
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
     
     if (nil != error) {
-        NSLog(@"ERROR: Error parsing Data to JSON %@", data);
+        NSLog(@"ERROR: Error parsing data to JSON %@", data);
         return YES;
     }
     
     if (![json[@"cod"] containsString:@"200"]) {
-        NSLog(@"ERROR: OpenWeather error: %@", json[@"cod"]);
+        NSLog(@"ERROR: OpenWeather error: %@ for Lat: %f, Lon: %f", json[@"cod"], self.inputLatitude, self.inputLongitude);
         return YES;
     }
     

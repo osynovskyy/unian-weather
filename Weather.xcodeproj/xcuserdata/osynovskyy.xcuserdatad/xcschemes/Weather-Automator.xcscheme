@@ -88,11 +88,11 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--audio"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "weather.aif"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--data"
@@ -111,7 +111,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "20:00"
+            argument = "t10:00"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
@@ -123,19 +123,19 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/Volumes/WeatherUnian/"
+            argument = "/Volumes/oleksii-osynovskyi/"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "smb://10.2.42.2/WeatherUnian"
+            argument = "afp://10.83.6.168/oleksii-osynovskyi"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "10.2.42.2\\Weather"
+            argument = "oleksii-osynovskyi"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "Unian"
+            argument = "superpuperdesign"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

@@ -95,6 +95,8 @@
                                                            colorSpace:colorSpace
                                                           composition:composition];
         
+        CGColorSpaceRelease(colorSpace);
+        
         for (NSString *key in keys) { //can throw exception, be careful
             if ([self.renderer setValue: [keys objectForKey:key] forInputKey: key] == NO) {
                 NSLog(@"ERROR: Couldn't set inputKeys");
@@ -102,8 +104,6 @@
             }
             NSLog(@"OK: %@ = %@", key, [self.renderer valueForInputKey: key ] );
         }
-        
-        CGColorSpaceRelease(colorSpace);
         
         if (self.renderer == nil)
             return nil;
@@ -324,17 +324,20 @@
             
             if (upperField == nil) {
                 NSLog(@"ERROR: -pixelBufferForTime: returns nil at time %f", CMTimeGetSeconds(renderTime));
+                CFRelease(lowerField);
                 failed = YES;
                 break;
             }
             
             //locking pixel buffers base addresses
-            CVReturn status = CVPixelBufferLockBaseAddress(lowerField, 1);
-            status = CVPixelBufferLockBaseAddress(upperField, 1);
+            CVReturn status1 = CVPixelBufferLockBaseAddress(lowerField, 1);
+            CVReturn status2 = CVPixelBufferLockBaseAddress(upperField, 1);
             
-            if (status != kCVReturnSuccess) {
+            if (status1 != kCVReturnSuccess || status2 != kCVReturnSuccess) {
                 failed = YES;
-                NSLog(@"ERROR: CVPixelBufferLockBaseAddress() error: %d", status);
+                CFRelease(lowerField);
+                CFRelease(upperField);
+                NSLog(@"ERROR: CVPixelBufferLockBaseAddress() error: %d %d", status1, status2);
                 break;
             }
             
@@ -344,6 +347,8 @@
             
             if (baseAddressLowerField == NULL || baseAddressUpperField == NULL) {
                 failed = YES;
+                CFRelease(lowerField);
+                CFRelease(upperField);
                 NSLog(@"ERROR: CVPixelBufferGetBaseAddress(() returns NULL");
                 break;
             }
@@ -361,12 +366,14 @@
             }
             
             //unblocking base addresses
-            status = CVPixelBufferUnlockBaseAddress(lowerField, 1);
-            status = CVPixelBufferUnlockBaseAddress(upperField, 1);
+            status1 = CVPixelBufferUnlockBaseAddress(lowerField, 1);
+            status2 = CVPixelBufferUnlockBaseAddress(upperField, 1);
             
-            if (status != kCVReturnSuccess) {
+            if (status1 != kCVReturnSuccess || status2 != kCVReturnSuccess) {
                 failed = YES;
-                NSLog(@"ERROR: CVPixelBufferUnlockBaseAddress() error: %d", status);
+                CFRelease(lowerField);
+                CFRelease(upperField);
+                NSLog(@"ERROR: CVPixelBufferUnlockBaseAddress() error: %d %d", status1, status2);
                 break;
             }
             
@@ -374,6 +381,8 @@
             
             if ([self.pixelBufferAdaptor appendPixelBuffer:lowerField withPresentationTime: CMTimeConvertScale(renderTime, 25, kCMTimeRoundingMethod_RoundTowardZero)] == NO) {
                 failed = YES;
+                CFRelease(lowerField);
+                CFRelease(upperField);
                 NSLog(@"ERROR: -appendPixelBuffer: error");
                 break;
             }
