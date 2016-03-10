@@ -19,6 +19,11 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>Sequence Loader.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>Weather Sector.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -63,6 +68,11 @@
 			<true/>
 		</dict>
 		<key>1CC87CC61B3C422A0044C1BA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AF6DE4241C7A1ADE00594C07</key>
 		<dict>
 			<key>primary</key>
 			<true/>

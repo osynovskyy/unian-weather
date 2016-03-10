@@ -20,6 +20,7 @@
 		<string>--data</string>
 		<string>sector_openweather.qtz</string>
 		<string>sector_forecastio.qtz</string>
+		<string>sector_wunderground.qtz</string>
 		<string>--time</string>
 		<string>10:00</string>
 		<string>14:00</string>
@@ -27,15 +28,18 @@
 		<string>t12:00</string>
 		<string>--ingest</string>
 		<string>/Volumes/WeatherUnian/</string>
+		<string>smb://10.2.42.2/WeatherUnian</string>
+		<string>10.2.42.2\\Weather</string>
+		<string>Unian</string>
 	</array>
 	<key>WorkingDirectory</key>
 	<string>/Users/oleksii-osynovskyi/Weather-Automator</string>
 	<key>RunAtLoad</key>
-	<true/>
+	<false/>
 	<key>StartCalendarInterval</key>
 	<dict>
 		<key>Hour</key>
-		<integer>6</integer>
+		<integer>5</integer>
 		<key>Minute</key>
 		<integer>0</integer>
 	</dict>

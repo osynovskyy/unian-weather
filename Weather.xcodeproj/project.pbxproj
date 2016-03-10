@@ -55,6 +55,7 @@
 		1CC87CCA1B3C422A0044C1BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC87CC91B3C422A0044C1BA /* main.m */; };
 		1CD0EEBC1B2ADDD600FBF35E /* JKInterpolationMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD0EEBB1B2ADDD600FBF35E /* JKInterpolationMath.m */; };
 		1CE5DBBD1B28348D00F14EC7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C4B3AA41B273613005D9232 /* MainMenu.xib */; };
+		AF6DE4291C7A1ADE00594C07 /* Sequence_LoaderPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6DE4281C7A1ADE00594C07 /* Sequence_LoaderPlugIn.m */; };
 		AFCED48D1B6A07CD0044165E /* weather.aif in Copy Resources */ = {isa = PBXBuildFile; fileRef = AFCED4871B6A07810044165E /* weather.aif */; };
 		AFCED48E1B6A07CD0044165E /* weather.qtz in Copy Resources */ = {isa = PBXBuildFile; fileRef = AFCED4881B6A07810044165E /* weather.qtz */; };
 		AFCED48F1B6A07CD0044165E /* sector_forecastio.qtz in Copy Resources */ = {isa = PBXBuildFile; fileRef = AFCED4891B6A07810044165E /* sector_forecastio.qtz */; };
@@ -118,6 +119,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 1C4B3A811B270264005D9232;
 			remoteInfo = "Weather Sector";
+		};
+		AF6DE42E1C7A1C8400594C07 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C4B3A791B270264005D9232 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AF6DE4241C7A1ADE00594C07;
+			remoteInfo = "Sequence Loader";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -218,6 +226,10 @@
 		1CC8E1A01B43D1B700BF2707 /* com.osynovskyy.weather-automator.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "com.osynovskyy.weather-automator.plist"; sourceTree = "<group>"; };
 		1CD0EEBA1B2ADDD600FBF35E /* JKInterpolationMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKInterpolationMath.h; sourceTree = "<group>"; };
 		1CD0EEBB1B2ADDD600FBF35E /* JKInterpolationMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKInterpolationMath.m; sourceTree = "<group>"; };
+		AF6DE4251C7A1ADE00594C07 /* Sequence Loader.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sequence Loader.plugin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF6DE4271C7A1ADE00594C07 /* Sequence_LoaderPlugIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sequence_LoaderPlugIn.h; sourceTree = "<group>"; };
+		AF6DE4281C7A1ADE00594C07 /* Sequence_LoaderPlugIn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Sequence_LoaderPlugIn.m; sourceTree = "<group>"; };
+		AF6DE42A1C7A1ADE00594C07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFCED4871B6A07810044165E /* weather.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = weather.aif; sourceTree = "<group>"; };
 		AFCED4881B6A07810044165E /* weather.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = weather.qtz; sourceTree = "<group>"; };
 		AFCED4891B6A07810044165E /* sector_forecastio.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = sector_forecastio.qtz; sourceTree = "<group>"; };
@@ -269,6 +281,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AF6DE4211C7A1ADE00594C07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -297,6 +316,7 @@
 				1C4B3A9A1B273613005D9232 /* App */,
 				1C6EDD271B3C146A00ED1BD4 /* Data Providers */,
 				1CC87CC81B3C422A0044C1BA /* Weather-Automator */,
+				AF6DE4261C7A1ADE00594C07 /* Sequence Loader */,
 				1C4B3A831B270264005D9232 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -310,6 +330,7 @@
 				1C3A10981B382B9500082106 /* ForecastIO Data Provider.plugin */,
 				1C91738F1B38588200D1A2E1 /* Wunderground Data Provider.plugin */,
 				1CC87CC71B3C422A0044C1BA /* Weather-Automator */,
+				AF6DE4251C7A1ADE00594C07 /* Sequence Loader.plugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -467,6 +488,16 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		AF6DE4261C7A1ADE00594C07 /* Sequence Loader */ = {
+			isa = PBXGroup;
+			children = (
+				AF6DE4271C7A1ADE00594C07 /* Sequence_LoaderPlugIn.h */,
+				AF6DE4281C7A1ADE00594C07 /* Sequence_LoaderPlugIn.m */,
+				AF6DE42A1C7A1ADE00594C07 /* Info.plist */,
+			);
+			path = "Sequence Loader";
+			sourceTree = "<group>";
+		};
 		AFCED48C1B6A078C0044165E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,6 +619,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				AF6DE42F1C7A1C8400594C07 /* PBXTargetDependency */,
 				1C64FF571B3F0D8D0079C37C /* PBXTargetDependency */,
 				1C64FF511B3F0D880079C37C /* PBXTargetDependency */,
 				1C64FF531B3F0D890079C37C /* PBXTargetDependency */,
@@ -598,13 +630,31 @@
 			productReference = 1CC87CC71B3C422A0044C1BA /* Weather-Automator */;
 			productType = "com.apple.product-type.tool";
 		};
+		AF6DE4241C7A1ADE00594C07 /* Sequence Loader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF6DE42B1C7A1ADE00594C07 /* Build configuration list for PBXNativeTarget "Sequence Loader" */;
+			buildPhases = (
+				AF6DE4201C7A1ADE00594C07 /* Sources */,
+				AF6DE4211C7A1ADE00594C07 /* Frameworks */,
+				AF6DE4221C7A1ADE00594C07 /* Resources */,
+				AF6DE4231C7A1ADE00594C07 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Sequence Loader";
+			productName = "Sequence Loader";
+			productReference = AF6DE4251C7A1ADE00594C07 /* Sequence Loader.plugin */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		1C4B3A791B270264005D9232 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Oleksii Osynovskyi";
 				TargetAttributes = {
 					1C3A10971B382B9500082106 = {
@@ -624,6 +674,9 @@
 					};
 					1CC87CC61B3C422A0044C1BA = {
 						CreatedOnToolsVersion = 6.3.2;
+					};
+					AF6DE4241C7A1ADE00594C07 = {
+						CreatedOnToolsVersion = 7.2.1;
 					};
 				};
 			};
@@ -646,6 +699,7 @@
 				1C3A10971B382B9500082106 /* ForecastIO Data Provider */,
 				1C91738E1B38588200D1A2E1 /* Wunderground Data Provider */,
 				1CC87CC61B3C422A0044C1BA /* Weather-Automator */,
+				AF6DE4241C7A1ADE00594C07 /* Sequence Loader */,
 			);
 		};
 /* End PBXProject section */
@@ -724,6 +778,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AF6DE4221C7A1ADE00594C07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -793,6 +854,19 @@
 			shellPath = /bin/sh;
 			shellScript = "#rm -rf \"$HOME/$PRODUCT_NAME/$PRODUCT_NAME\"\n#cp -rf \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME\" \"$HOME/$PRODUCT_NAME/\"\n\n#rm -rf \"$HOME/$PRODUCT_NAME/com.osynovskyy.weather-automator.plist\"\n#cp -rf \"$PROJECT_DIR/$PRODUCT_NAME/com.osynovskyy.weather-automator.plist\" \"$HOME/$PRODUCT_NAME/\"\n";
 		};
+		AF6DE4231C7A1ADE00594C07 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This shell script simply copies the built plug-in to \"~/Library/Graphics/Quartz Composer Plug-Ins\" and overrides any previous version at that location\n\nmkdir -p \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins\"\nrm -rf \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/Sequence Loader.plugin\"\ncp -rf \"$BUILT_PRODUCTS_DIR/Sequence Loader.plugin\" \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -847,6 +921,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AF6DE4201C7A1ADE00594C07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF6DE4291C7A1ADE00594C07 /* Sequence_LoaderPlugIn.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -890,6 +972,11 @@
 			target = 1C4B3A811B270264005D9232 /* Weather Sector */;
 			targetProxy = 1CCA89F11B286A440009C69E /* PBXContainerItemProxy */;
 		};
+		AF6DE42F1C7A1C8400594C07 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AF6DE4241C7A1ADE00594C07 /* Sequence Loader */;
+			targetProxy = AF6DE42E1C7A1C8400594C07 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -915,6 +1002,7 @@
 				INFOPLIST_FILE = "ForecastIO Data Provider/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "osynovskyy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = plugin;
@@ -928,6 +1016,7 @@
 				INFOPLIST_FILE = "ForecastIO Data Provider/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "osynovskyy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = plugin;
@@ -954,6 +1043,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1018,6 +1108,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Weather Sector/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				PRODUCT_BUNDLE_IDENTIFIER = "osynovskyy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = plugin;
 			};
@@ -1030,6 +1121,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Weather Sector/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				PRODUCT_BUNDLE_IDENTIFIER = "osynovskyy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = plugin;
 			};
@@ -1052,6 +1144,7 @@
 				INFOPLIST_FILE = App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "osynovskyy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1069,6 +1162,7 @@
 				INFOPLIST_FILE = App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "osynovskyy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -1084,6 +1178,7 @@
 				INFOPLIST_FILE = "OpenWeather Data Provider/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "osynovskyy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = plugin;
@@ -1097,6 +1192,7 @@
 				INFOPLIST_FILE = "OpenWeather Data Provider/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "osynovskyy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = plugin;
@@ -1114,6 +1210,7 @@
 				INFOPLIST_FILE = "Wunderground Data Provider/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "osynovskyy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = plugin;
@@ -1127,6 +1224,7 @@
 				INFOPLIST_FILE = "Wunderground Data Provider/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "osynovskyy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = plugin;
@@ -1171,6 +1269,34 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AF6DE42C1C7A1ADE00594C07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Sequence Loader/Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.osynovskyy.Sequence-Loader";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Debug;
+		};
+		AF6DE42D1C7A1ADE00594C07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Sequence Loader/Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.osynovskyy.Sequence-Loader";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = plugin;
 			};
 			name = Release;
 		};
@@ -1239,6 +1365,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
+		};
+		AF6DE42B1C7A1ADE00594C07 /* Build configuration list for PBXNativeTarget "Sequence Loader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF6DE42C1C7A1ADE00594C07 /* Debug */,
+				AF6DE42D1C7A1ADE00594C07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

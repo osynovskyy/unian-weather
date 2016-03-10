@@ -263,7 +263,7 @@ int main(int argc, const char * argv[]) {
                 renderDate = [fullDateFormatter dateFromString: [NSString stringWithFormat:@"%@ %@", [dateFormatter stringFromDate:nowDate], time] ];
             
             if ([nowDate compare:renderDate] != NSOrderedDescending) {
-                
+            
                 int result;
                 
                 do {
